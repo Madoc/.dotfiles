@@ -1,0 +1,2 @@
+DISABLE_UPDATE_PROMPT=true
+ZSH="$HOME/.oh-my-zsh"

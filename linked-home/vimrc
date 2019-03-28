@@ -1,0 +1,32 @@
+set nocompatible
+set background=dark
+syntax on
+set backspace=indent,eol,start
+set backup
+set backupdir=~/.vim/backup
+set directory=~/.vim/tmp
+set fileformats=mac,unix,dos
+set mouse=a
+set cursorline
+set ruler
+set laststatus=2
+set showmatch
+set incsearch
+set ignorecase
+set smartcase
+set wildmenu
+set wildmode=list:longest:full
+set whichwrap=b,s,h,l,<,>,[,]
+set autoindent
+set shiftwidth=2
+set expandtab
+set softtabstop=4
+set pastetoggle=<F12>
+"set nu "line numbers
+filetype plugin indent on
+set nowrap
+
+fun! MySys()
+   return "$1"
+endfun
+set runtimepath=~/.vim_runtime,~/.vim_runtime/after,\$VIMRUNTIME
