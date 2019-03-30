@@ -7,7 +7,7 @@ main() {
   for candidate_file in "${HOME}/".*; do
     base_name=$(basename "${candidate_file}")
     without_dot="${base_name:1}"
-    if [[ -f "${HOME}/.dotfiles/linked-home/${without_dot}" ]]; then
+    if [[ -e "${HOME}/.dotfiles/linked-home/${without_dot}" ]]; then
       true
     elif [[ "${base_name}" == .zcompdump* ]]; then
       true
