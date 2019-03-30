@@ -16,4 +16,4 @@ source /usr/local/bin/aws_zsh_completer.sh
 # Overwrites the default ZSH-Git prompt:
 PS1=$'%{\e[0;38;5;243m%}∴ %~ %{\e[0m%}'
 
-[ -f "$HOME/.furyrc/zsh" ] && source "$HOME/.furyrc/zsh"
+[[ -f "$HOME/.furyrc/zsh" ]] && source "$HOME/.furyrc/zsh"
