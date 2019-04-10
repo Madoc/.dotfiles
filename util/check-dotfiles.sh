@@ -14,8 +14,8 @@ main() {
     else
       case "${base_name}" in
       '.' | '..' | '.CFUserTextEncoding' | '.CloudStation' | '.DS_Store' | '.Trash' | '.Xauthority' | '.adobe' |\
-      '.aws' | '.bash_history' | '.bintray' | '.bundle' | '.cache' | '.config' | '.cups' | '.dirish' | '.docker' |\
-      '.dotfiles' | '.dotfiles-private' | '.dropbox' | '.eclipse' | '.gem' | '.gnupg' | '.gnupg_pre_2.1' |\
+      '.android' | '.aws' | '.bash_history' | '.bintray' | '.bundle' | '.cache' | '.config' | '.cups' | '.dirish' |\
+      '.docker' | '.dotfiles' | '.dotfiles-private' | '.dropbox' | '.eclipse' | '.gem' | '.gnupg' | '.gnupg_pre_2.1' |\
       '.hgignore_global' | '.history' | '.idea-build' | '.ideaLibSources' | '.iterm2' | '.ivy2' | '.kube' |\
       '.lesshst' | '.local' | '.m2' | '.npm' | '.oh-my-zsh' | '.op' | '.oracle_jre_usage' | '.p2' | '.sbt' |\
       '.scala_history' | '.scalac' | '.scalaide' | '.scdhistory' | '.sh_history' | '.ssh' | '.tooling' | '.travis' |\
