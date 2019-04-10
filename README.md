@@ -1,4 +1,4 @@
-Dotfiles of Matthias Deja.
+Dotfiles of @Madoc.
 
 # Installation
 
