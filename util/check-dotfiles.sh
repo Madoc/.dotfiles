@@ -17,9 +17,9 @@ main() {
       '.android' | '.aws' | '.bash_history' | '.bintray' | '.bundle' | '.cache' | '.config' | '.cups' | '.dirish' |\
       '.docker' | '.dotfiles' | '.dotfiles-private' | '.dropbox' | '.eclipse' | '.gem' | '.gnupg' | '.gnupg_pre_2.1' |\
       '.hgignore_global' | '.history' | '.idea-build' | '.ideaLibSources' | '.iterm2' | '.ivy2' | '.kube' |\
-      '.lesshst' | '.local' | '.m2' | '.npm' | '.oh-my-zsh' | '.op' | '.oracle_jre_usage' | '.p2' | '.sbt' |\
-      '.scala_history' | '.scalac' | '.scalaide' | '.scdhistory' | '.sh_history' | '.ssh' | '.tooling' | '.travis' |\
-      '.uuid' | '.vim' | '.viminfo' | '.zinc' | '.zsh_history')
+      '.lesshst' | '.local' | '.m2' | '.npm' | '.oh-my-zsh' | '.op' | '.oracle_jre_usage' | '.p2' | '.pdfbox.cache' |\
+      '.sbt' | '.scala_history' | '.scalac' | '.scalaide' | '.scdhistory' | '.sh_history' | '.ssh' | '.tooling' |\
+      '.travis' | '.uuid' | '.vim' | '.viminfo' | '.zinc' | '.zsh_history')
         ;;
       *)
         echo "Unexpected file in home directory: ${candidate_file}" ;;
