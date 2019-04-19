@@ -26,7 +26,7 @@ The user will only be notified.
   Checks the dotfiles for updates.
   Pulling updates will not be performed automatically.
   Instead, the user will only be notified.
-  No matter how often this script is executed, it performs the check only up to once per day.
+  No matter how often this script is executed, it performs a Git fetch only up to once per day.
   
   This script is called automatically by a new shell.
 * `.dotfiles/util/check-dotfiles.sh`:

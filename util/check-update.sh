@@ -2,8 +2,10 @@
 #
 # Prints a message if the repo needs to be updated or has local changes.
 # The repo directory needs to be passed in as first argument.
+# The second argument is either `true` or `false`, determining if a `git fetch` should be done.
 
 REPO_DIRECTORY="$1"
+DO_FETCH="$2"
 
 check_for_updates() {
   cd "${REPO_DIRECTORY}" &&\
@@ -22,7 +24,11 @@ fetch() {
 
 main() {
   validate_parameters
-  fetch && check_for_updates
+  if [[ "$DO_FETCH" == "true" ]]; then
+    fetch && check_for_updates
+  else
+    check_for_updates
+  fi
 }
 
 print_update_message() {
@@ -50,6 +56,10 @@ validate_parameters() {
     exit 1
   elif [[ ! -d "${REPO_DIRECTORY}/.git" ]]; then
     echo "${REPO_DIRECTORY}: not a Git repository." >&2
+    exit 1
+  elif [[ ! (("$DO_FETCH" == "true") || ("$DO_FETCH" == "false")) ]]; then
+    echo "Expected either 'true' or 'false' as second argument." >&2
+    echo "This specifies wether or not to perform a Git fetch first." >&2
     exit 1
   fi
 }
