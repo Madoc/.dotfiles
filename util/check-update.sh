@@ -34,7 +34,7 @@ print_update_message() {
   elif [[ "${local_ref}" == "${base_ref}" ]]; then
     echo "${REPO_DIRECTORY}: Remote changes found. Please pull the changes:"
     echo ""
-    echo "    cd \"${REPO_DIRECTORY}\" && git pull && ./install.sh"
+    echo "    cd \"${REPO_DIRECTORY}\" && git pull && ./install.sh && cd -"
     echo ""
   elif [[ "${remote_ref}" == "${base_ref}" ]]; then
     echo "${REPO_DIRECTORY}: Local changes found. Do not forget to push them."
