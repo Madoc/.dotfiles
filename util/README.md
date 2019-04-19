@@ -14,3 +14,5 @@ Utility scripts related to the dotfiles.
   Checks the given Git repository for updates and prints a message if local or remote updates are pending.
 
   This script is called up to once per day by the auto update.
+* `maintain-zsh-plugins.sh`:
+  Clones missing Zsh plugins.

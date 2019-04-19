@@ -37,6 +37,8 @@ The user will only be notified.
   Checks the given Git repository for updates and prints a message if local or remote updates are pending.
   
   This script is called up to once per day by the auto update.
+* `.dotfiles/util/maintain-zsh-plugins.sh`:
+  Clones missing Zsh plugins.
 
 # File structure
 

@@ -1,4 +1,4 @@
-plugins=(osx scd)
+plugins=(command-time osx scd)
 UPDATE_ZSH_DAYS=1
 ZSH_THEME="robbyrussell"
 
@@ -15,6 +15,7 @@ source /usr/local/bin/aws_zsh_completer.sh
 
 PS1=$'%{\e[0;38;5;243m%}∴ %~ %{\e[0m%}'
 
+"$HOME/.dotfiles/util/maintain-zsh-plugins.sh"
 [[ -f "$HOME/.furyrc/zsh" ]] && source "$HOME/.furyrc/zsh"
 
 update_prompt() {
