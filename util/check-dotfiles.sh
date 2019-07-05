@@ -28,7 +28,9 @@ is_expected() {
     '.dotfiles-private' |\
     '.dropbox' |\
     '.eclipse' |\
+    '.emulator_console_auth_token' |\
     '.gem' |\
+    '.gnome2' |\
     '.gnupg' |\
     '.gnupg_pre_2.1' |\
     '.gradle' |\
@@ -42,6 +44,7 @@ is_expected() {
     '.lesshst' |\
     '.local' |\
     '.m2' |\
+    '.mono' |\
     '.npm' |\
     '.oh-my-zsh' |\
     '.op' |\
