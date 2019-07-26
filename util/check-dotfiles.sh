@@ -51,6 +51,7 @@ is_expected() {
     '.oracle_jre_usage' |\
     '.p2' |\
     '.pdfbox.cache' |\
+    '.putty' |\
     '.sbt' |\
     '.scala_history' |\
     '.scalac' |\
