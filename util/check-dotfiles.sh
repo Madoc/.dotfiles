@@ -30,6 +30,7 @@ is_expected() {
     '.eclipse' |\
     '.emulator_console_auth_token' |\
     '.gem' |\
+    '.gitkraken' |\
     '.gnome2' |\
     '.gnupg' |\
     '.gnupg_pre_2.1' |\
