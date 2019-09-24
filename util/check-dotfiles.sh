@@ -60,6 +60,7 @@ is_expected() {
     '.scdhistory' |\
     '.sh_history' |\
     '.ssh' |\
+    '.SynologyDrive' |\
     '.tooling' |\
     '.travis' |\
     '.uuid' |\
