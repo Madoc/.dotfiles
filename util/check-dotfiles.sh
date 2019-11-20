@@ -45,6 +45,7 @@ is_expected() {
     '.lesshst' |\
     '.local' |\
     '.m2' |\
+    '.markdownNavigator' |\
     '.mono' |\
     '.npm' |\
     '.oh-my-zsh' |\
@@ -66,6 +67,7 @@ is_expected() {
     '.uuid' |\
     '.vim' |\
     '.viminfo' |\
+    '.wget-hsts' |\
     '.zinc' |\
     '.zsh_history')
     true;;
