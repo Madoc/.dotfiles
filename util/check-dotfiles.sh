@@ -16,7 +16,6 @@ is_expected() {
     '.adobe' |\
     '.android' |\
     '.aws' |\
-    '.bash_history' |\
     '.bintray' |\
     '.bundle' |\
     '.cache' |\
