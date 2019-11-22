@@ -23,12 +23,19 @@ The user will only be notified.
 
 # Some highlights
 
+* `lfcd` command for visual directory navigation.
+  (Only works if [`lf`](https://github.com/gokcehan/lf) is installed.)
 * Java versions switchable per shell, [defined here](scripts/java).
 * Pretty good global `gitignore`, [defined here](linked-home/gitignore_global).
 * Only for Zsh:
+  * Really useful [Powerlevel10k prompt](https://github.com/romkatv/powerlevel10k).
+  * Run `lfcd` with <kbd>CTRL</kbd>+<kbd>O</kbd>, [defined here](scripts/typing).
+  * Live [syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting).
   * When a command takes a non-trivial time to run, the run time will be printed after it exits, [defined
     here](scripts/command-time).
   * Auto completion of known hosts for `ssh` and similar commands, [defined here](scripts/typing).
+  * Vim mode when hitting <kbd>ESC</kbd>.
+    Go back with <kbd>i</kbd>.
   * The first symbol of the prompt becomes red when the previous command failed, [defined here](scripts/prompt).
   * `cd` can be left out when changing directories, [defined here](scripts/navigation).
 

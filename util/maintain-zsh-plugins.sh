@@ -3,3 +3,5 @@
 # Ensures that all needed Zsh plugins are installed, or clones them if not.
 
 [[ -e "$HOME/.oh-my-zsh/custom/plugins/command-time" ]] || git clone "https://github.com/popstas/zsh-command-time.git" "$HOME/.oh-my-zsh/custom/plugins/command-time"
+[[ -e "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ]] || git clone "https://github.com/zsh-users/zsh-syntax-highlighting.git" "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+[[ -e "$HOME/.oh-my-zsh/custom/themes/powerlevel10k" ]] || git clone --depth=1 "https://github.com/romkatv/powerlevel10k.git" "$HOME/.oh-my-zsh/custom/themes/powerlevel10k"

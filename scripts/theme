@@ -1,5 +1,5 @@
 # What the shell looks like.
 
 init_env_zsh() {
-  ZSH_THEME="robbyrussell"
+  ZSH_THEME="powerlevel10k/powerlevel10k"
 }
