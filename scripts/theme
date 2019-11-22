@@ -1,0 +1,5 @@
+# What the shell looks like.
+
+init_env_zsh() {
+  ZSH_THEME="robbyrussell"
+}

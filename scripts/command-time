@@ -1,0 +1,7 @@
+# Displays the run duration after exit of a command if it runs longer than a certain threshold.
+
+init_env_zsh() {
+  plugins+=(command-time)
+  ZSH_COMMAND_TIME_MIN_SECONDS=20
+  ZSH_COMMAND_TIME_MSG="  \e[0;38;5;243m--[\e[0;38;5;3m %s later \e[0;38;5;243m]--\e[0m"
+}

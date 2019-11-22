@@ -1,0 +1,12 @@
+# Navigating directories with the shell.
+
+init_rc() {
+  alias ..='cd ..'
+  alias ...='cd ../..'
+  alias cd..='cd ..'
+}
+
+init_rc_zsh() {
+  plugins+=(scd) # Easily scd to recently visted directories.
+  setopt auto_cd # Leave out "cd" when changing to a directory.
+}

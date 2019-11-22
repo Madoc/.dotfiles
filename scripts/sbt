@@ -1,0 +1,6 @@
+# https://www.scala-sbt.org
+
+init_env() {
+  PATH="$PATH:$HOME/bin/shared/sbt/bin"
+  SBT_OPTS='-Xmx8G -XX:ReservedCodeCacheSize=2G -XX:MaxMetaspaceSize=1G -Xss4m'
+}

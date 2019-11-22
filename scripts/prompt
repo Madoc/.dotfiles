@@ -1,0 +1,22 @@
+# Shell prompt setup.
+
+init_env_other() {
+  PROMPT_COMMAND='history -a' # Sync history after every command.
+  PS1='\[\033[1;30m\]bash \w\e\[[0m\] '
+}
+
+init_env_zsh() {
+  precmd_functions+=(update_prompt)
+  PS1=$'%{\e[0;38;5;243m%}∴ %~ %{\e[0m%}'
+}
+
+init_rc_zsh() {
+  # Make the prompt symbol red if the last command failed.
+  update_prompt() {
+    if [[ "$?" == "0" ]]; then
+      PS1=$'%{\e[0;38;5;243m%}∴ %~ %{\e[0m%}'
+    else
+      PS1=$'%{\e[0;38;5;1m%}∴ %{\e[0;38;5;243m%}%~ %{\e[0m%}'
+    fi
+  }
+}

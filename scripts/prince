@@ -1,0 +1,5 @@
+# https://www.princexml.com
+
+init_env() {
+  PATH="$PATH:$HOME/bin/shared/prince"
+}

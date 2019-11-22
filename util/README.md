@@ -1,4 +1,5 @@
 Utility scripts related to the dotfiles.
+
 * `auto-update-sh`:
   Checks the dotfiles for updates.
   Pulling updates will not be performed automatically.
@@ -16,3 +17,6 @@ Utility scripts related to the dotfiles.
   This script is called up to once per day by the auto update.
 * `maintain-zsh-plugins.sh`:
   Clones missing Zsh plugins.
+* `shell-start-setup`:
+  Sourced by the shell startup files, such as `.bashrc`, `.zshrc` or `.zshenv`.
+  Common function definitions for calling all the startup scripts in a controlled manner.

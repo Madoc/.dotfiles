@@ -1,0 +1,14 @@
+# https://fury.build
+
+init_env() {
+  FURYHOME="$HOME/bin/shared-meta/fury-0.4.0"
+  PATH="$PATH:$FURYHOME/bin"
+}
+
+init_rc_other() {
+  [[ -f "$HOME/.furyrc/bash" ]] && source "$HOME/.furyrc/bash"
+}
+
+init_rc_zsh() {
+  [[ -f "$HOME/.furyrc/zsh" ]] && source "$HOME/.furyrc/zsh"
+}

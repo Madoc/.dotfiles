@@ -1,0 +1,5 @@
+# Check for superfluous/unknown dotfiles.
+
+init_rc() {
+  "${HOME}/.dotfiles/util/check-dotfiles.sh"
+}

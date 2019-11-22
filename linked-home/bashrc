@@ -1,1 +1,4 @@
-source "$HOME/.dotfiles/shell-start/bash/rc.sh"
+source "$HOME/.dotfiles/util/shell-start-setup"
+_call_start_env
+_call_start_rc
+_shell_start_teardown
