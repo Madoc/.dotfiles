@@ -30,7 +30,6 @@ init_rc_zsh() {
 
   bindkey '^I' complete-word
   bindkey "^[[3~" delete-char
-  bindkey -s '^o' 'lfcd\n' # CTRL+O: `lfcd`
   bindkey -v # ESC: Vi mode
 
   setopt correct # Suggest correction on typos.
@@ -53,4 +52,6 @@ init_rc_zsh() {
 init_post_rc_zsh() {
   [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh
   source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+  bindkey -s '^o' 'lfcd\n' # CTRL+O: `lfcd`
+  bindkey '^R' history-incremental-search-backward # CTRL+R: backwards history search
 }
