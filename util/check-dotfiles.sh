@@ -46,11 +46,15 @@ is_expected() {
     '.m2' |\
     '.markdownNavigator' |\
     '.mono' |\
+    '.newstore' |\
+    '.newstore.yml' |\
+    '.newstore.yml.lock' |\
     '.npm' |\
     '.oh-my-zsh' |\
     '.op' |\
     '.oracle_jre_usage' |\
     '.p2' |\
+    '.parallel' |\
     '.pdfbox.cache' |\
     '.putty' |\
     '.sbt' |\
