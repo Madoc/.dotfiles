@@ -17,6 +17,6 @@ init_rc() {
   alias gstat='git status'
   alias gpull='git pull'
   alias gpush='git push'
-  alias gpu-f='git push -f'
+  alias gpu-f='git push --force-with-lease'
   alias greb='git rebase'
 }
