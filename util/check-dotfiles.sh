@@ -34,6 +34,7 @@ is_expected() {
     '.gnupg' |\
     '.gnupg_pre_2.1' |\
     '.gradle' |\
+    '.helm' |\
     '.hgignore_global' |\
     '.history' |\
     '.idea-build' |\
