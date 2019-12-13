@@ -63,6 +63,7 @@ is_expected() {
     '.scalac' |\
     '.scalaide' |\
     '.scdhistory' |\
+    '.sdkman' |\
     '.sh_history' |\
     '.ssh' |\
     '.SynologyDrive' |\
