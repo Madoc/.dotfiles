@@ -1,0 +1,5 @@
+# https://www.haskell.org/ and https://docs.haskellstack.org/
+
+init_env() {
+  PATH="$PATH:$HOME/bin/shared/stack"
+}
