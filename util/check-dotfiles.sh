@@ -29,6 +29,7 @@ is_expected() {
     '.eclipse' |\
     '.emulator_console_auth_token' |\
     '.gem' |\
+    '.ghc' |\
     '.gitkraken' |\
     '.gnome2' |\
     '.gnupg' |\
@@ -66,6 +67,7 @@ is_expected() {
     '.sdkman' |\
     '.sh_history' |\
     '.ssh' |\
+    '.stack' |\
     '.SynologyDrive' |\
     '.tooling' |\
     '.travis' |\
