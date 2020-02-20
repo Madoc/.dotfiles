@@ -30,7 +30,7 @@ init_rc_zsh() {
 
   bindkey '^I' complete-word
   bindkey "^[[3~" delete-char
-  bindkey -v # ESC: Vi mode
+  #bindkey -v # ESC: Vi mode
 
   setopt correct # Suggest correction on typos.
 
