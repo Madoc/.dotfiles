@@ -12,17 +12,6 @@ init_rc() {
   alias ll='ls -hl'
   alias ls="ls -FG"
   alias new-uuid='uuidgen | tr "[:upper:]" "[:lower:]"'
-
-  # Use `lf` for directory navigation. Taken from: https://gist.github.com/LukeSmithxyz/e62f26e55ea8b0ed41a65912fbebbe52
-  lfcd() {
-    local tmp="$(mktemp)"
-    lf -last-dir-path="$tmp" "$@"
-    if [[ -f "$tmp" ]]; then
-      local dir="$(cat "$tmp")"
-      rm -rf "$tmp"
-      [[ -d "$dir" ]] && [[ "$dir" != "$(pwd)" ]] && cd "$dir"
-    fi
-  }
 }
 
 init_rc_zsh() {
@@ -52,6 +41,6 @@ init_rc_zsh() {
 init_post_rc_zsh() {
   [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh
   source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-  bindkey -s '^o' 'lfcd\n' # CTRL+O: `lfcd`
+  bindkey -s '^o' '. /usr/local/Cellar/midnight-commander/4.8.24/libexec/mc/mc-wrapper.sh\n' # CTRL+O: Midnight Commander for directory navigation
   bindkey '^R' history-incremental-search-backward # CTRL+R: backwards history search
 }
