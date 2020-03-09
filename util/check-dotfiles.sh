@@ -15,6 +15,7 @@ is_expected() {
     '.Xauthority' |\
     '.adobe' |\
     '.android' |\
+    '.atom' |\
     '.aws' |\
     '.bintray' |\
     '.bundle' |\
@@ -69,6 +70,7 @@ is_expected() {
     '.ssh' |\
     '.stack' |\
     '.SynologyDrive' |\
+    '.testcontainers.properties' |\
     '.tooling' |\
     '.travis' |\
     '.uuid' |\
