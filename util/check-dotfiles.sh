@@ -36,6 +36,7 @@ is_expected() {
     '.gnupg' |\
     '.gnupg_pre_2.1' |\
     '.gradle' |\
+    '.hasura' |\
     '.helm' |\
     '.hgignore_global' |\
     '.history' |\
