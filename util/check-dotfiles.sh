@@ -56,6 +56,7 @@ is_expected() {
     '.npm' |\
     '.oh-my-zsh' |\
     '.op' |\
+    '.openjfx' |\
     '.oracle_jre_usage' |\
     '.p2' |\
     '.parallel' |\
