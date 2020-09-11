@@ -1,0 +1,8 @@
+# https://rust-lang.org
+
+init_env() {
+  CARGO_HOME="$HOME/.cargo"
+  RUSTUP_HOME="$HOME/.rustup"
+  PATH="$PATH:$CARGO_HOME/bin"
+  [[ -f "$CARGO_HOME/env" ]] && source "$CARGO_HOME/env"
+}
