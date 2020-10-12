@@ -132,6 +132,7 @@ $RECYCLE.BIN/
 /*.gcno
 /.anjuta/
 /.anjuta_sym_db.db
+/.bsp/
 /.emacs.desktop
 /.emacs.desktop.lock
 /.tgitconfig
