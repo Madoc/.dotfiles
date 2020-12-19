@@ -3,7 +3,7 @@ Best used with [Zsh](http://www.zsh.org/) and [Oh My ZSH](https://ohmyz.sh/).
 
 # Installation
 
-```
+```bash
 cd "$HOME"
 git clone git@github.com:Madoc/.dotfiles.git
 .dotfiles/install.sh
@@ -25,19 +25,16 @@ The user will only be notified.
 
 * `lfcd` command for visual directory navigation.
   (Only works if [`lf`](https://github.com/gokcehan/lf) is installed.)
-* Java versions switchable per shell, [defined here](scripts/java).
+* Java versions switchable per shell, as per commands like `j11` or `j8`.
 * Pretty good global `gitignore`, [defined here](linked-home/gitignore_global).
 * Only for Zsh:
-  * Really useful [Powerlevel10k prompt](https://github.com/romkatv/powerlevel10k).
-  * Run `lfcd` with <kbd>CTRL</kbd>+<kbd>O</kbd>, [defined here](scripts/typing).
+  * [Powerlevel10k prompt](https://github.com/romkatv/powerlevel10k).
+  * Run `lfcd` with <kbd>CTRL</kbd>+<kbd>O</kbd>.
   * Live [syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting).
-  * When a command takes a non-trivial time to run, the run time will be printed after it exits, [defined
-    here](scripts/command-time).
-  * Auto completion of known hosts for `ssh` and similar commands, [defined here](scripts/typing).
-  * Vim mode when hitting <kbd>ESC</kbd>.
-    Go back with <kbd>i</kbd>.
-  * The first symbol of the prompt becomes red when the previous command failed, [defined here](scripts/prompt).
-  * `cd` can be left out when changing directories, [defined here](scripts/navigation).
+  * When a command takes a non-trivial time to run, the run time will be printed after it exits.
+  * Auto completion of known hosts for `ssh` and similar commands.
+  * The first symbol of the prompt becomes red when the previous command failed.
+  * `cd` can be left out when changing directories.
 
 # File structure
 
@@ -45,15 +42,13 @@ The user will only be notified.
   Contains this Git repository.
 * `~/.dotfiles/scripts`: 
   Those scripts are called on every shell start.
-  They define certain functions, which get called in a certain sequence.
-  
-  For the details, [see here](scripts/README.md).
+  They define certain functions, which get called in a certain sequence, depending on the shell type.
 * `~/.dotfiles/linked-home`: 
   All files in this directory the will be linked to from the home directory.
   The leading period character is left out here, as these files should not be hidden.
   Therefore, `~/.bashrc` will be linked to `~/.dotfiles/linked-home/bashrc`.
 * `~/.dotfiles/util`:
-  Utility scripts related to the dotfiles.
+  Utility scripts and binaries related to the dotfiles.
 
 # Utilities
 
@@ -74,6 +69,3 @@ The user will only be notified.
   This script is called up to once per day by the auto update.
 * `.dotfiles/util/maintain-zsh-plugins.sh`:
   Clones missing Zsh plugins.
-* `shell-start-setup`:
-  Sourced by the shell startup files, such as `.bashrc`, `.zshrc` or `.zshenv`.
-  Common function definitions for calling all the startup scripts in a controlled manner.

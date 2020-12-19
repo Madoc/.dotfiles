@@ -1,0 +1,66 @@
+# Dirish
+
+alias p-pull='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish pull'
+alias p-status='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish status'
+alias p-sync='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish sync'
+
+# Git
+
+function acp { # Add, commit, push.
+  git add . && git commit -m "$*" && git push
+}
+
+alias ga.='git add .'
+alias gadd='git add'
+alias gam-n='git commit --amend --no-edit'
+alias gamend='git commit --amend'
+alias gcheck='git checkout'
+alias gcomm='git commit'
+alias gfetch='git fetch'
+alias glog='git log'
+alias gls='git ls'
+alias gst='git st'
+alias gstat='git status'
+alias gpull='git pull'
+alias gpush='git push'
+alias gpu-f='git push --force-with-lease'
+alias greb='git rebase'
+
+# Java
+
+alias j8="export JAVA_HOME=\"$JAVA_08_HOME\"; java -version"
+alias j11="export JAVA_HOME=\"$JAVA_11_HOME\"; java -version"
+alias j12="export JAVA_HOME=\"$JAVA_12_HOME\"; java -version"
+
+# Maintenance
+
+"$HOME/.dotfiles/util/check-dotfiles.sh" # Report unknown or superfluous dotfiles in the home directory.
+"$HOME/.dotfiles/util/maintain-zsh-plugins.sh" # Make sure all required plugins are installed.
+"${HOME}/.dotfiles/util/auto-update.sh" # Warn if dotfiles are out of date.
+[[ -f "${HOME}/.dotfiles-private/util/auto-update.sh" ]] && "${HOME}/.dotfiles-private/util/auto-update.sh"
+
+# Navigation
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias cd..='cd ..'
+
+# Private
+
+[[ -f "$HOME/.dotfiles-private/scripts/post_rc" ]] && source "$HOME/.dotfiles-private/scripts/post_rc"
+
+# SDKMan
+
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
+# Travis
+
+[[ -f "$HOME/.travis/travis.sh" ]] && source "$HOME/.travis/travis.sh"
+
+# Typing
+
+alias e=subl
+alias la='ls -lAh'
+alias ll='ls -hl'
+alias ls="ls -FG"
+alias new-uuid='uuidgen | tr "[:upper:]" "[:lower:]"'

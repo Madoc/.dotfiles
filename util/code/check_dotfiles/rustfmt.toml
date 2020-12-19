@@ -1,0 +1,31 @@
+edition="2018"
+
+max_width=120
+tab_spaces=2
+use_field_init_shorthand=true
+use_try_shorthand=true
+
+# Unstable:
+#
+#brace_style="PreferSameLine"
+#comment_width=120
+#condense_wildcard_suffixes=true
+#fn_single_line=true
+#inline_attribute_width=120
+#match_arm_blocks=false
+#merge_imports=true
+#overflow_delimited_expr=true
+#space_after_colon=false
+#type_punctuation_density="Compressed"
+#trailing_semicolon=false
+#where_single_line=true
+#wrap_comments=true
+
+# Not yet supported on stable:
+#
+#fn_params_layout="Compressed"
+#single_line_if_else_max_width=120
+#space_around_attr_eq=false
+#struct_lit_width=120
+#struct_variant_width=120
+#width_heuristics="Max"

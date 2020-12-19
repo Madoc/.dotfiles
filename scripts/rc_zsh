@@ -1,0 +1,40 @@
+plugins+=(command-time osx)
+
+# History
+
+setopt hist_find_no_dups hist_ignore_dups hist_ignore_space
+unsetopt share_history
+
+# iTerm
+
+[[ -f "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
+
+# Navigation
+
+plugins+=(scd) # Easily scd to recently visted directories.
+setopt auto_cd # Leave out "cd" when changing to a directory.
+
+# Oh my Zsh
+
+[[ -f "$ZSH/oh-my-zsh.sh" ]] && source "$ZSH/oh-my-zsh.sh" # Auto-update Oh My Zsh.
+
+# Prompt
+
+[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+
+# Typing
+
+bindkey '^I' complete-word
+bindkey "^[[3~" delete-char
+bindkey -s '^o' '. /usr/local/Cellar/midnight-commander/4.8.24/libexec/mc/mc-wrapper.sh\n' # CTRL+O: Midnight Commander for directory navigation
+bindkey '^R' history-incremental-search-backward # CTRL+R: backwards history search
+
+setopt correct # Suggest correction on typos.
+
+# Known hosts auto completion for ssh and similar commands:
+zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f)"$(cat {/etc/ssh_,~/.ssh/known_}hosts(|2)(N) /dev/null)"}%%[# ]*}//,/ })'
+
+# Finally: late scripts
+
+[[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh
+source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

@@ -1,0 +1,14 @@
+# Command-time
+
+ZSH_COMMAND_TIME_MIN_SECONDS=20
+ZSH_COMMAND_TIME_MSG="  \e[0;38;5;243m--[\e[0;38;5;3m %s later \e[0;38;5;243m]--\e[0m"
+
+# Theme
+
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Oh my Zsh
+
+DISABLE_UPDATE_PROMPT=true # Zsh won't ask for pulling updates.
+UPDATE_ZSH_DAYS=1 # Zsh will check for updates once per day.
+ZSH="$HOME/.oh-my-zsh"

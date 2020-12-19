@@ -1,5 +1,0 @@
-# Run initialization script for private stuff, if present.
-
-init_post_rc() {
-  [[ -f "$HOME/.dotfiles-private/scripts/post_rc" ]] && source "$HOME/.dotfiles-private/scripts/post_rc"
-}

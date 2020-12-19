@@ -1,6 +1,0 @@
-# Warn if dotfiles are out of date.
-
-init_rc() {
-  "${HOME}/.dotfiles/util/auto-update.sh"
-  [[ -f "${HOME}/.dotfiles-private/util/auto-update.sh" ]] && "${HOME}/.dotfiles-private/util/auto-update.sh"
-}

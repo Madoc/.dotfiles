@@ -1,5 +1,0 @@
-# https://www.scala-lang.org
-
-init_env() {
-  PATH="$PATH:$HOME/bin/shared/scala/bin"
-}

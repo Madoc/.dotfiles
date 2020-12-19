@@ -1,4 +1,3 @@
-source "$HOME/.dotfiles/util/shell-start-setup"
-_call_start_env
-_call_start_rc
-_shell_start_teardown
+source "$HOME/.dotfiles/scripts/env_common"
+source "$HOME/.dotfiles/scripts/env_no_zsh"
+source "$HOME/.dotfiles/scripts/rc_common"

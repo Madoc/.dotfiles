@@ -1,0 +1,4 @@
+# Prompt
+
+PROMPT_COMMAND='history -a' # Sync history after every command.
+PS1='\[\033[1;30m\]bash \w\e\[[0m\] '

@@ -1,3 +1,2 @@
-source "$HOME/.dotfiles/util/shell-start-setup"
-_call_start_rc
-_shell_start_teardown
+source "$HOME/.dotfiles/scripts/rc_common"
+source "$HOME/.dotfiles/scripts/rc_zsh"

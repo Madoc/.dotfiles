@@ -1,5 +1,0 @@
-# Shell plugin maintenance.
-
-init_rc_zsh() {
-  "$HOME/.dotfiles/util/maintain-zsh-plugins.sh" # Make sure all required plugins are installed.
-}

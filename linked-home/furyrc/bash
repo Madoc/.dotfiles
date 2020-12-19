@@ -1,3 +1,0 @@
-export PATH=$FURYHOME/bin:$PATH
-# FIXME: Need to include bash completions
-source $HOME/.furyrc/aliases

@@ -1,3 +1,0 @@
-init_env() {
-  PATH="$PATH:$HOME/bin/shared/maven/bin"
-}

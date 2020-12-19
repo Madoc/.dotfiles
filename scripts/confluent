@@ -1,5 +1,0 @@
-# Confluent CLI tools.
-
-init_env() {
-  PATH=$PATH:$HOME/bin/shared/confluent/bin
-}

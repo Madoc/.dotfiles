@@ -1,0 +1,47 @@
+# History
+
+HISTCONTROL=ignoreboth:ignorespace
+HISTFILE="$HOME/.history"
+HISTSIZE=1000
+SAVEHIST=1000
+
+# Java
+
+JAVA_08_HOME="`/usr/libexec/java_home -v 1.8`"
+JAVA_11_HOME="$HOME/bin/shared/java/v11"
+JAVA_12_HOME="$HOME/bin/shared/java/v12"
+JAVA_HOME="$JAVA_12_HOME"
+
+# Rust
+
+CARGO_HOME="$HOME/.cargo"
+RUSTUP_HOME="$HOME/.rustup"
+
+# SBT
+
+SBT_OPTS='-Xmx8G -XX:ReservedCodeCacheSize=2G -XX:MaxMetaspaceSize=1G -Xss4m'
+
+# SDKMAN
+
+SDKMAN_DIR="$HOME/.sdkman"
+
+# Finally: paths
+
+INFOPATH=$INFOPATH:/opt/local/share/info
+
+MANPATH=$MANPATH:/opt/local/share/man
+
+PATH=$PATH:\
+$CARGO_HOME/bin:\
+$HOME/bin:\
+$HOME/bin/shared:\
+$HOME/bin/shared/confluent/bin:\
+$HOME/bin/shared/maven/bin:\
+$HOME/bin/shared/prince:\
+$HOME/bin/shared/sbt/bin:\
+$HOME/bin/shared/scala/bin:\
+$HOME/bin/shared/stack:\
+$HOME/Library/Python/2.7/bin:\
+/Library/Frameworks/Python.framework/Versions/Current/bin:\
+/opt/local/bin:\
+/opt/local/sbin
