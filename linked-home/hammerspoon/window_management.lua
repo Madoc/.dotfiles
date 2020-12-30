@@ -20,6 +20,7 @@ All other keys will be handled as normal; window management mode is not modal.
 --
 
 keymap = {
+  exit = {key = "escape"},
   focusSelection = {multi = {{key = "Space"}, {key = "Return"}}},
   selectionEast = {multi = {{key = "Right"}, {key = "l"}}},
   selectionSouth = {multi = {{key = "Down"}, {key = "j"}}},
@@ -38,6 +39,7 @@ colors = {
 
 stateKeybindings = {
   windowManagement = {
+    {key = keymap.exit, func = function() exitWindowManagementState() end},
     {key = keymap.focusSelection, func = function() focusSelection() end},
     {key = keymap.selectionEast, func = function() moveSelectionEast() end},
     {key = keymap.selectionNorth, func = function() moveSelectionNorth() end},
