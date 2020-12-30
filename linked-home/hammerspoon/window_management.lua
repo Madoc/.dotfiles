@@ -1,18 +1,27 @@
 --[[
 Window management.
-Includes window switching.
+Includes window switching, movement and resizing.
 
 Usage:
 
-The window management key (shift+control+escape by default) activates window management mode.
+The window management key (shift+control+escape by default) activates window management.
 A red box will be drawn arond the selected window, which starts off as the focus window.
 This box can be moved to other windows, by default with cursor keys or Vi-style navigation (h, j, k, l).
 
-Hitting the focus key (space or enter by default) focuses the selected window and exits window management mode.
+Hitting the focus key (enter by default) focuses the selected window and exits window management mode.
 Hitting the window management key again exits window management mode without changing anything.
 Exiting can also be achieved with the exit key (escape by default).
 
 All other keys will be handled as normal; window management mode is not modal.
+
+Hitting space switches modes.
+The initial mode is window focusing, the second mode is the grid mode.
+
+In grid mode, a grid will be drawn on the screen.
+The currently selected grid cell will be displayed in blue.
+The selection can be moved (cursor keys or Vi-style navigation by default).
+Hitting the "accept" key (enter by default) resizes and moves the focused window to the dimension of and exits window
+ management.
 --]]
 
 --
@@ -20,8 +29,9 @@ All other keys will be handled as normal; window management mode is not modal.
 --
 
 keymap = {
+  acceptSelection = { key = "Return"},
+  changeMode = {key = "Space"},
   exit = {key = "escape"},
-  focusSelection = {multi = {{key = "Space"}, {key = "Return"}}},
   selectionEast = {multi = {{key = "Right"}, {key = "l"}}},
   selectionSouth = {multi = {{key = "Down"}, {key = "j"}}},
   selectionNorth = {multi = {{key = "Up"}, {key = "k"}}},
@@ -30,7 +40,22 @@ keymap = {
 }
 
 colors = {
-  focus = {["red"] = 1, ["green"] = 0.5, ["blue"] = 0.5}
+  focus = {red = 1, green = 0.5, blue = 0.5},
+  gridActive = {red = 0.75, green = 0.75, blue = 1},
+  gridInactive = {red = 0.35, green = 0.35, blue = 0.35},
+}
+
+dimensions = {
+  defaultGridHeight = 2,
+  defaultGridWidth = 3,
+  focusedWindowBorderWidth = 5,
+  gridBorderWidth = 3,
+}
+
+levels = {
+  focusedWindow = hs.drawing.windowLevels.assistiveTechHigh+1,
+  gridActive = hs.drawing.windowLevels.assistiveTechHigh+3,
+  gridInactive = hs.drawing.windowLevels.assistiveTechHigh+2,
 }
 
 --
@@ -38,9 +63,14 @@ colors = {
 --
 
 stateKeybindings = {
+  grid = {
+    {key = keymap.changeMode, func = function() exitGridState(); enterWindowManagementState(true) end},
+    {key = keymap.exit, func = function() exitGridState() end},
+  },
   windowManagement = {
+    {key = keymap.changeMode, func = function() exitWindowManagementState(); enterGridState() end},
     {key = keymap.exit, func = function() exitWindowManagementState() end},
-    {key = keymap.focusSelection, func = function() focusSelection() end},
+    {key = keymap.acceptSelection, func = function() focusSelection() end},
     {key = keymap.selectionEast, func = function() moveSelectionEast() end},
     {key = keymap.selectionNorth, func = function() moveSelectionNorth() end},
     {key = keymap.selectionSouth, func = function() moveSelectionSouth() end},
@@ -49,6 +79,11 @@ stateKeybindings = {
 }
 
 selections = {
+  grid = {
+    height = dimensions.defaultGridHeight, width = dimensions.defaultGridWidth,
+    selectionX = 0, selectionY = 0,
+    screen = nil, rects = nil,
+  },
   focusedWindow = {rectDrawing = nil, color = colors.focus, window = nil}
 }
 
@@ -56,11 +91,11 @@ selections = {
 -- UI state management
 --
 
-function enterWindowManagementState()
-  focusedWindow = hs.window.focusedWindow()
-  if not focusedWindow then
-    focusedWindow = hs.window.frontmostWindow()
-  end
+function enterWindowManagementState(preserveFocus)
+  local focusedWindow = nil
+  if preserveFocus then focusedWindow = selections.focusedWindow.window end
+  if not focusedWindow then focusedWindow = hs.window.focusedWindow() end
+  if not focusedWindow then focusedWindow = hs.window.frontmostWindow() end
   if focusedWindow then
     bindKey(keymap.windowManagement, exitWindowManagementState)
     for _, keybinding in ipairs(stateKeybindings.windowManagement) do bindKey(keybinding.key, keybinding.func) end
@@ -71,6 +106,18 @@ end
 function exitWindowManagementState()
   bindKey(keymap.windowManagement, enterWindowManagementState)
   for _, keybinding in ipairs(stateKeybindings.windowManagement) do unbindKey(keybinding.key) end
+  removeAllHighlights()
+end
+
+function enterGridState()
+  bindKey(keymap.windowManagement, exitGridState)
+  for _, keybinding in ipairs(stateKeybindings.grid) do bindKey(keybinding.key, keybinding.func) end
+  createGrid()
+end
+
+function exitGridState()
+  bindKey(keymap.windowManagement, enterWindowManagementState)
+  for _, keybinding in ipairs(stateKeybindings.grid) do unbindKey(keybinding.key) end
   removeAllHighlights()
 end
 
@@ -118,13 +165,49 @@ function selectWindow(selection, window)
     rect:setFill(false)
     rect:setStroke(true)
     rect:setStrokeColor(selection.color)
-    rect:setStrokeWidth(5)
+    rect:setStrokeWidth(dimensions.focusedWindowBorderWidth)
+    rect:setLevel(levels.focusedWindow)
     selection.rectDrawing = rect
     rect:show()
   end
 end
 
+function createGrid()
+  if not selections.grid.screen then selections.grid.screen = selections.focusedWindow.window:screen() end
+  local screen = selections.grid.screen
+  if screen then
+    local screenX1, screenY1 = screen:frame().x1, screen:frame().y1
+    local screenWidth, screenHeight = screen:frame().w, screen:frame().h
+    selections.grid.rects = {}
+    for x = 0, selections.grid.width-1 do
+      local row = {}
+      selections.grid.rects[x] = row
+      for y = 0, selections.grid.height-1 do
+        local cell = {}
+        row[y] = cell
+        local rectX1, rectY1 = screenX1 + math.floor(screenWidth*x/selections.grid.width), screenY1 + math.floor(screenHeight*y/selections.grid.height)
+        local rectX2, rectY2 = screenX1 + math.floor(screenWidth*(x+1)/selections.grid.width), screenY1 + math.floor(screenHeight*(y+1)/selections.grid.height)
+        local rect = hs.drawing.rectangle(hs.geometry.rect(rectX1, rectY1, rectX2-rectX1+1, rectY2-rectY1+1))
+        local isSelected = (x == selections.grid.selectionX) and (y == selections.grid.selectionY)
+        rect:setFill(false)
+        rect:setStroke(true)
+        rect:setStrokeWidth(dimensions.gridBorderWidth)
+        if isSelected then
+          rect:setStrokeColor(colors.gridActive)
+          rect:setLevel(levels.gridActive)
+        else
+          rect:setStrokeColor(colors.gridInactive)
+          rect:setLevel(levels.gridInactive)
+        end
+        cell.rectDrawing = rect
+        rect:show()
+      end
+    end
+  end
+end
+
 function removeAllHighlights()
+  removeGrid()
   removeHighlight(selections.focusedWindow)
 end
 
@@ -133,6 +216,16 @@ function removeHighlight(highlight)
   if rectDrawing then
     rectDrawing:hide()
     highlight.rectDrawing = nil
+  end
+end
+
+function removeGrid()
+  if selections.grid.rects then
+    for x = 0, selections.grid.width-1 do for y = 0, selections.grid.height-1 do
+      local cell = selections.grid.rects[x][y]
+      if cell then removeHighlight(cell) end
+    end end
+    selections.grid.rects = nil
   end
 end
 
