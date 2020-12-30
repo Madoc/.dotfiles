@@ -66,11 +66,15 @@ stateKeybindings = {
   grid = {
     {key = keymap.changeMode, func = function() exitGridState(); enterWindowManagementState(true) end},
     {key = keymap.exit, func = function() exitGridState() end},
+    {key = keymap.selectionEast, func = function() gridMoveEast() end},
+    {key = keymap.selectionNorth, func = function() gridMoveNorth() end},
+    {key = keymap.selectionSouth, func = function() gridMoveSouth() end},
+    {key = keymap.selectionWest, func = function() gridMoveWest() end},
   },
   windowManagement = {
+    {key = keymap.acceptSelection, func = function() focusSelection() end},
     {key = keymap.changeMode, func = function() exitWindowManagementState(); enterGridState() end},
     {key = keymap.exit, func = function() exitWindowManagementState() end},
-    {key = keymap.acceptSelection, func = function() focusSelection() end},
     {key = keymap.selectionEast, func = function() moveSelectionEast() end},
     {key = keymap.selectionNorth, func = function() moveSelectionNorth() end},
     {key = keymap.selectionSouth, func = function() moveSelectionSouth() end},
@@ -112,6 +116,7 @@ end
 function enterGridState()
   bindKey(keymap.windowManagement, exitGridState)
   for _, keybinding in ipairs(stateKeybindings.grid) do bindKey(keybinding.key, keybinding.func) end
+  selectWindow(selections.focusedWindow, selections.focusedWindow.window)
   createGrid()
 end
 
@@ -152,6 +157,46 @@ function selectWindowsToEast(window) return window:windowsToEast() end
 function selectWindowsToNorth(window) return window:windowsToNorth() end
 function selectWindowsToSouth(window) return window:windowsToSouth() end
 function selectWindowsToWest(window) return window:windowsToWest() end
+
+function gridMoveEast()
+  if selections.grid.selectionX+1 < selections.grid.width then
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    selections.grid.selectionX = selections.grid.selectionX + 1
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
+  end
+end
+
+function gridMoveNorth()
+  if selections.grid.selectionY > 0 then
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    selections.grid.selectionY = selections.grid.selectionY - 1
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
+  end
+end
+
+function gridMoveSouth()
+  if selections.grid.selectionY+1 < selections.grid.height then
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    selections.grid.selectionY = selections.grid.selectionY + 1
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
+  end
+end
+
+function gridMoveWest()
+  if selections.grid.selectionX > 0 then
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    selections.grid.selectionX = selections.grid.selectionX - 1
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
+    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
+  end
+end
 
 --
 -- Visual feedback
