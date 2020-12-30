@@ -57,9 +57,12 @@ selections = {
 --
 
 function enterWindowManagementState()
-  bindKey(keymap.windowManagement, exitWindowManagementState)
-  for _, keybinding in ipairs(stateKeybindings.windowManagement) do bindKey(keybinding.key, keybinding.func) end
-  selectWindow(selections.focusedWindow, hs.window.focusedWindow()) -- TODO do not enter the state when there is no focused window
+  focusedWindow = hs.window.focusedWindow()
+  if focusedWindow then
+    bindKey(keymap.windowManagement, exitWindowManagementState)
+    for _, keybinding in ipairs(stateKeybindings.windowManagement) do bindKey(keybinding.key, keybinding.func) end
+    selectWindow(selections.focusedWindow, focusedWindow)
+  end
 end
 
 function exitWindowManagementState()
