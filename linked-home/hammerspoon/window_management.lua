@@ -22,6 +22,8 @@ The currently selected grid cell will be displayed in blue.
 The selection can be moved (cursor keys or Vi-style navigation by default).
 Hitting the "accept" key (enter by default) resizes and moves the focused window to the dimension of and exits window
  management.
+
+Enlarging or shrinking the grid resolution is done with cursor-like navigation (s, d, f, g by default).
 --]]
 
 --
