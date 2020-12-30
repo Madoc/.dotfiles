@@ -64,6 +64,7 @@ levels = {
 
 stateKeybindings = {
   grid = {
+    {key = keymap.acceptSelection, func = function() gridAccept() end},
     {key = keymap.changeMode, func = function() exitGridState(); enterWindowManagementState(true) end},
     {key = keymap.exit, func = function() exitGridState() end},
     {key = keymap.selectionEast, func = function() gridMoveEast() end},
@@ -157,6 +158,15 @@ function selectWindowsToEast(window) return window:windowsToEast() end
 function selectWindowsToNorth(window) return window:windowsToNorth() end
 function selectWindowsToSouth(window) return window:windowsToSouth() end
 function selectWindowsToWest(window) return window:windowsToWest() end
+
+--
+-- Grid selection
+--
+
+function gridAccept()
+  selections.focusedWindow.window:setFrame(selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:frame())
+  exitGridState()
+end
 
 function gridMoveEast()
   if selections.grid.selectionX+1 < selections.grid.width then
