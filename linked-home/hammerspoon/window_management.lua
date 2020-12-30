@@ -107,26 +107,23 @@ selections = {
 --
 
 function enterWindowManagementState(preserveFocus)
-  local focusedWindow
-  if preserveFocus then focusedWindow = selections.focusedWindow.window end
-  if not focusedWindow then focusedWindow = hs.window.focusedWindow() end
-  if not focusedWindow then focusedWindow = hs.window.frontmostWindow() end
+  local focusedWindow = getDefaultFocusedWindow(preserveFocus)
   if focusedWindow then
     bindKey(keymap.windowManagement, exitWindowManagementState)
-    for _, keybinding in ipairs(stateKeybindings.windowManagement) do bindKey(keybinding.key, keybinding.func) end
+    bindKeys(stateKeybindings.windowManagement)
     selectWindow(selections.focusedWindow, focusedWindow)
   end
 end
 
 function exitWindowManagementState()
   bindKey(keymap.windowManagement, enterWindowManagementState)
-  for _, keybinding in ipairs(stateKeybindings.windowManagement) do unbindKey(keybinding.key) end
+  unbindKeys(stateKeybindings.windowManagement)
   removeAllHighlights()
 end
 
 function enterGridState()
   bindKey(keymap.windowManagement, exitGridState)
-  for _, keybinding in ipairs(stateKeybindings.grid) do bindKey(keybinding.key, keybinding.func) end
+  bindKeys(stateKeybindings.grid)
   selectWindow(selections.focusedWindow, selections.focusedWindow.window)
   selections.grid.screen = selections.focusedWindow.window:screen()
   createGrid()
@@ -134,7 +131,7 @@ end
 
 function exitGridState()
   bindKey(keymap.windowManagement, enterWindowManagementState)
-  for _, keybinding in ipairs(stateKeybindings.grid) do unbindKey(keybinding.key) end
+  unbindKeys(stateKeybindings.grid)
   removeAllHighlights()
 end
 
@@ -322,6 +319,22 @@ function unbindKey(keymapElement)
       keymapElement.hotkey = nil
     end
   end
+end
+
+function bindKeys(bindings) for _, binding in ipairs(bindings) do bindKey(binding.key, binding.func) end end
+
+function unbindKeys(bindings) for _, binding in ipairs(bindings) do unbindKey(binding.key) end end
+
+--
+-- Window actions
+--
+
+function getDefaultFocusedWindow(preserveFocus)
+  local focusedWindow
+  if preserveFocus then focusedWindow = selections.focusedWindow.window end
+  if not focusedWindow then focusedWindow = hs.window.focusedWindow() end
+  if not focusedWindow then focusedWindow = hs.window.frontmostWindow() end
+  return focusedWindow
 end
 
 --
