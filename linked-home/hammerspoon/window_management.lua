@@ -58,6 +58,9 @@ selections = {
 
 function enterWindowManagementState()
   focusedWindow = hs.window.focusedWindow()
+  if not focusedWindow then
+    focusedWindow = hs.window.frontmostWindow()
+  end
   if focusedWindow then
     bindKey(keymap.windowManagement, exitWindowManagementState)
     for _, keybinding in ipairs(stateKeybindings.windowManagement) do bindKey(keybinding.key, keybinding.func) end
