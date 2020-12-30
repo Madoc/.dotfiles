@@ -36,6 +36,10 @@ keymap = {
   selectionSouth = {multi = {{key = "Down"}, {key = "j"}}},
   selectionNorth = {multi = {{key = "Up"}, {key = "k"}}},
   selectionWest = {multi = {{key = "Left"}, {key = "h"}}},
+  sizeEnlargeX = { key = "g"},
+  sizeEnlargeY = { key = "f"},
+  sizeShrinkX = {key = "s"},
+  sizeShrinkY = {key = "d"},
   windowManagement = {mods = {"shift", "control"}, key = "escape"},
 }
 
@@ -71,6 +75,10 @@ stateKeybindings = {
     {key = keymap.selectionNorth, func = function() gridMoveNorth() end},
     {key = keymap.selectionSouth, func = function() gridMoveSouth() end},
     {key = keymap.selectionWest, func = function() gridMoveWest() end},
+    {key = keymap.sizeEnlargeX, func = function() gridEnlargeX() end},
+    {key = keymap.sizeEnlargeY, func = function() gridEnlargeY() end},
+    {key = keymap.sizeShrinkX, func = function() gridShrinkX() end},
+    {key = keymap.sizeShrinkY, func = function() gridShrinkY() end},
   },
   windowManagement = {
     {key = keymap.acceptSelection, func = function() focusSelection() end},
@@ -170,8 +178,14 @@ end
 
 function gridMoveEast()
   if selections.grid.selectionX+1 < selections.grid.width then
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    local cell = selections.grid.rects[selections.grid.selectionX]
+    if cell then
+      cell = cell[selections.grid.selectionY]
+      if cell and cell.rectDrawing then
+        cell.rectDrawing:setStrokeColor(colors.gridInactive)
+        cell.rectDrawing:setLevel(levels.gridInactive)
+      end
+    end
     selections.grid.selectionX = selections.grid.selectionX + 1
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
@@ -180,8 +194,14 @@ end
 
 function gridMoveNorth()
   if selections.grid.selectionY > 0 then
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    local cell = selections.grid.rects[selections.grid.selectionX]
+    if cell then
+      cell = cell[selections.grid.selectionY]
+      if cell and cell.rectDrawing then
+        cell.rectDrawing:setStrokeColor(colors.gridInactive)
+        cell.rectDrawing:setLevel(levels.gridInactive)
+      end
+    end
     selections.grid.selectionY = selections.grid.selectionY - 1
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
@@ -190,8 +210,14 @@ end
 
 function gridMoveSouth()
   if selections.grid.selectionY+1 < selections.grid.height then
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    local cell = selections.grid.rects[selections.grid.selectionX]
+    if cell then
+      cell = cell[selections.grid.selectionY]
+      if cell and cell.rectDrawing then
+        cell.rectDrawing:setStrokeColor(colors.gridInactive)
+        cell.rectDrawing:setLevel(levels.gridInactive)
+      end
+    end
     selections.grid.selectionY = selections.grid.selectionY + 1
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
@@ -200,11 +226,47 @@ end
 
 function gridMoveWest()
   if selections.grid.selectionX > 0 then
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridInactive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridInactive)
+    local cell = selections.grid.rects[selections.grid.selectionX]
+    if cell then
+      cell = cell[selections.grid.selectionY]
+      if cell and cell.rectDrawing then
+        cell.rectDrawing:setStrokeColor(colors.gridInactive)
+        cell.rectDrawing:setLevel(levels.gridInactive)
+      end
+    end
     selections.grid.selectionX = selections.grid.selectionX - 1
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
     selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
+  end
+end
+
+function gridEnlargeX()
+  removeGrid()
+  selections.grid.width = selections.grid.width + 1
+  createGrid()
+end
+
+function gridEnlargeY()
+  removeGrid()
+  selections.grid.height = selections.grid.height + 1
+  createGrid()
+end
+
+function gridShrinkX()
+  if selections.grid.width > 1 then
+    removeGrid()
+    selections.grid.width = selections.grid.width - 1
+    createGrid()
+    if selections.grid.width <= selections.grid.selectionX then gridMoveWest() end
+  end
+end
+
+function gridShrinkY()
+  if selections.grid.height > 1 then
+    removeGrid()
+    selections.grid.height = selections.grid.height - 1
+    createGrid()
+    if selections.grid.height <= selections.grid.selectionY then gridMoveNorth() end
   end
 end
 
