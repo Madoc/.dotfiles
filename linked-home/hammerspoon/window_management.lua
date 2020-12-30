@@ -38,8 +38,8 @@ keymap = {
   selectionSouth = {multi = {{key = "Down"}, {key = "j"}}},
   selectionNorth = {multi = {{key = "Up"}, {key = "k"}}},
   selectionWest = {multi = {{key = "Left"}, {key = "h"}}},
-  sizeEnlargeX = { key = "g"},
-  sizeEnlargeY = { key = "f"},
+  sizeEnlargeX = {key = "g"},
+  sizeEnlargeY = {key = "f"},
   sizeShrinkX = {key = "s"},
   sizeShrinkY = {key = "d"},
   windowManagement = {mods = {"shift", "control"}, key = "escape"},
@@ -107,7 +107,7 @@ selections = {
 --
 
 function enterWindowManagementState(preserveFocus)
-  local focusedWindow = nil
+  local focusedWindow
   if preserveFocus then focusedWindow = selections.focusedWindow.window end
   if not focusedWindow then focusedWindow = hs.window.focusedWindow() end
   if not focusedWindow then focusedWindow = hs.window.frontmostWindow() end
@@ -128,6 +128,7 @@ function enterGridState()
   bindKey(keymap.windowManagement, exitGridState)
   for _, keybinding in ipairs(stateKeybindings.grid) do bindKey(keybinding.key, keybinding.func) end
   selectWindow(selections.focusedWindow, selections.focusedWindow.window)
+  selections.grid.screen = selections.focusedWindow.window:screen()
   createGrid()
 end
 
@@ -178,97 +179,33 @@ function gridAccept()
   exitGridState()
 end
 
-function gridMoveEast()
-  if selections.grid.selectionX+1 < selections.grid.width then
-    local cell = selections.grid.rects[selections.grid.selectionX]
-    if cell then
-      cell = cell[selections.grid.selectionY]
-      if cell and cell.rectDrawing then
-        cell.rectDrawing:setStrokeColor(colors.gridInactive)
-        cell.rectDrawing:setLevel(levels.gridInactive)
-      end
-    end
-    selections.grid.selectionX = selections.grid.selectionX + 1
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
+function gridMoveEast() gridMove(1, 0) end
+function gridMoveNorth() gridMove(0, -1) end
+function gridMoveSouth() gridMove(0, 1) end
+function gridMoveWest() gridMove(-1, 0) end
+
+function gridMove(dx, dy)
+  local newX, newY = selections.grid.selectionX + dx, selections.grid.selectionY + dy
+  if newX>=0 and newX<selections.grid.width and newY>=0 and newY<selections.grid.height then
+    removeGridHighlight()
+    selections.grid.selectionX, selections.grid.selectionY = newX, newY
+    addGridHighlight()
   end
 end
 
-function gridMoveNorth()
-  if selections.grid.selectionY > 0 then
-    local cell = selections.grid.rects[selections.grid.selectionX]
-    if cell then
-      cell = cell[selections.grid.selectionY]
-      if cell and cell.rectDrawing then
-        cell.rectDrawing:setStrokeColor(colors.gridInactive)
-        cell.rectDrawing:setLevel(levels.gridInactive)
-      end
-    end
-    selections.grid.selectionY = selections.grid.selectionY - 1
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
-  end
-end
+function gridEnlargeX() gridResize(1, 0) end
+function gridEnlargeY() gridResize(0, 1) end
+function gridShrinkX() gridResize(-1, 0) end
+function gridShrinkY() gridResize(0, -1) end
 
-function gridMoveSouth()
-  if selections.grid.selectionY+1 < selections.grid.height then
-    local cell = selections.grid.rects[selections.grid.selectionX]
-    if cell then
-      cell = cell[selections.grid.selectionY]
-      if cell and cell.rectDrawing then
-        cell.rectDrawing:setStrokeColor(colors.gridInactive)
-        cell.rectDrawing:setLevel(levels.gridInactive)
-      end
-    end
-    selections.grid.selectionY = selections.grid.selectionY + 1
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
-  end
-end
-
-function gridMoveWest()
-  if selections.grid.selectionX > 0 then
-    local cell = selections.grid.rects[selections.grid.selectionX]
-    if cell then
-      cell = cell[selections.grid.selectionY]
-      if cell and cell.rectDrawing then
-        cell.rectDrawing:setStrokeColor(colors.gridInactive)
-        cell.rectDrawing:setLevel(levels.gridInactive)
-      end
-    end
-    selections.grid.selectionX = selections.grid.selectionX - 1
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setStrokeColor(colors.gridActive)
-    selections.grid.rects[selections.grid.selectionX][selections.grid.selectionY].rectDrawing:setLevel(levels.gridActive)
-  end
-end
-
-function gridEnlargeX()
-  removeGrid()
-  selections.grid.width = selections.grid.width + 1
-  createGrid()
-end
-
-function gridEnlargeY()
-  removeGrid()
-  selections.grid.height = selections.grid.height + 1
-  createGrid()
-end
-
-function gridShrinkX()
-  if selections.grid.width > 1 then
+function gridResize(dw, dh)
+  local newWidth, newHeight = selections.grid.width + dw, selections.grid.height + dh
+  if newWidth>0 and newHeight>0 then
     removeGrid()
-    selections.grid.width = selections.grid.width - 1
+    selections.grid.width, selections.grid.height = newWidth, newHeight
+    if newWidth<=selections.grid.selectionX then selections.grid.selectionX=selections.grid.width-1 end
+    if newHeight<=selections.grid.selectionY then selections.grid.selectionY=selections.grid.height-1 end
     createGrid()
-    if selections.grid.width <= selections.grid.selectionX then gridMoveWest() end
-  end
-end
-
-function gridShrinkY()
-  if selections.grid.height > 1 then
-    removeGrid()
-    selections.grid.height = selections.grid.height - 1
-    createGrid()
-    if selections.grid.height <= selections.grid.selectionY then gridMoveNorth() end
   end
 end
 
@@ -291,6 +228,19 @@ function selectWindow(selection, window)
   end
 end
 
+function removeAllHighlights()
+  removeGrid()
+  removeHighlight(selections.focusedWindow)
+end
+
+function removeHighlight(highlight)
+  local rectDrawing = highlight.rectDrawing
+  if rectDrawing then
+    rectDrawing:hide()
+    highlight.rectDrawing = nil
+  end
+end
+
 function createGrid()
   if not selections.grid.screen then selections.grid.screen = selections.focusedWindow.window:screen() end
   local screen = selections.grid.screen
@@ -307,35 +257,17 @@ function createGrid()
         local rectX1, rectY1 = screenX1 + math.floor(screenWidth*x/selections.grid.width), screenY1 + math.floor(screenHeight*y/selections.grid.height)
         local rectX2, rectY2 = screenX1 + math.floor(screenWidth*(x+1)/selections.grid.width), screenY1 + math.floor(screenHeight*(y+1)/selections.grid.height)
         local rect = hs.drawing.rectangle(hs.geometry.rect(rectX1, rectY1, rectX2-rectX1+1, rectY2-rectY1+1))
-        local isSelected = (x == selections.grid.selectionX) and (y == selections.grid.selectionY)
         rect:setFill(false)
         rect:setStroke(true)
         rect:setStrokeWidth(dimensions.gridBorderWidth)
-        if isSelected then
-          rect:setStrokeColor(colors.gridActive)
-          rect:setLevel(levels.gridActive)
-        else
-          rect:setStrokeColor(colors.gridInactive)
-          rect:setLevel(levels.gridInactive)
-        end
+        rect:setStrokeColor(colors.gridInactive)
+        rect:setLevel(levels.gridInactive)
         cell.rectDrawing = rect
         rect:show()
       end
     end
   end
-end
-
-function removeAllHighlights()
-  removeGrid()
-  removeHighlight(selections.focusedWindow)
-end
-
-function removeHighlight(highlight)
-  local rectDrawing = highlight.rectDrawing
-  if rectDrawing then
-    rectDrawing:hide()
-    highlight.rectDrawing = nil
-  end
+  addGridHighlight()
 end
 
 function removeGrid()
@@ -345,6 +277,26 @@ function removeGrid()
       if cell then removeHighlight(cell) end
     end end
     selections.grid.rects = nil
+  end
+end
+
+function addGridHighlight() setGridCellActive(selections.grid.selectionX, selections.grid.selectionY, true)  end
+
+function removeGridHighlight() setGridCellActive(selections.grid.selectionX, selections.grid.selectionY, false) end
+
+function setGridCellActive(x, y, active)
+  if selections.grid.rects then
+    local cell = selections.grid.rects[x]
+    if cell then cell = cell[y] end
+    if cell and cell.rectDrawing then
+      if active then
+        cell.rectDrawing:setStrokeColor(colors.gridActive)
+        cell.rectDrawing:setLevel(levels.gridActive)
+      else
+        cell.rectDrawing:setStrokeColor(colors.gridInactive)
+        cell.rectDrawing:setLevel(levels.gridInactive)
+      end
+    end
   end
 end
 
