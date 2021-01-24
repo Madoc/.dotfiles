@@ -41,6 +41,7 @@ $HOME/bin/shared/prince:\
 $HOME/bin/shared/sbt/bin:\
 $HOME/bin/shared/scala/bin:\
 $HOME/bin/shared/stack:\
+$HOME/bin/shared/zig:\
 $HOME/Library/Python/2.7/bin:\
 /Library/Frameworks/Python.framework/Versions/Current/bin:\
 /opt/local/bin:\
