@@ -58,6 +58,7 @@
 .m2
 .markdownNavigator
 .mono
+.nimble
 .npm
 .oh-my-zsh
 .op
