@@ -4,6 +4,13 @@ alias p-pull='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish pul
 alias p-status='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish status'
 alias p-sync='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish sync'
 
+# Ensure packages are installed
+
+which brew kak >/dev/null || {
+  which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  which kak >/dev/null || brew install kakoune
+}
+
 # Git
 
 function acp { # Add, commit, push.
