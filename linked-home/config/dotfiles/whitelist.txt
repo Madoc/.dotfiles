@@ -101,6 +101,7 @@
 .config/.mono
 .config/Battle.net
 .config/configstore
+.config/dotfiles
 .config/filezilla
 .config/gtk-2.0
 .config/inkscape

@@ -27,6 +27,7 @@ The user will only be notified.
   (Only works if [`lf`](https://github.com/gokcehan/lf) is installed.)
 * Java versions switchable per shell, as per commands like `j11` or `j8`.
 * Pretty good global `gitignore`, [defined here](linked-home/gitignore_global).
+* [Starship](https://starship.rs/) prompt.
 * Only for Zsh:
   * Run `lfcd` with <kbd>CTRL</kbd>+<kbd>O</kbd>.
   * Live [syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting).
