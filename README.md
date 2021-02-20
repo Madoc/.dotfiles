@@ -35,6 +35,8 @@ The user will only be notified.
   * Auto completion of known hosts for `ssh` and similar commands.
   * The first symbol of the prompt becomes red when the previous command failed.
   * `cd` can be left out when changing directories.
+* In conjunction with [Hammerspoon]:
+  * Window management ([see here](linked-home/hammerspoon/window_management.lua)).
 
 # File structure
 
@@ -69,3 +71,5 @@ The user will only be notified.
   This script is called up to once per day by the auto update.
 * `.dotfiles/util/maintain-zsh-plugins.sh`:
   Clones missing Zsh plugins.
+
+[Hammerspoon]: https://www.hammerspoon.org/

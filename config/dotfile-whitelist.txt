@@ -41,6 +41,7 @@
 .gnupg
 .gnupg_pre_2.1
 .gradle
+.hammerspoon
 .hasura
 .helm
 .hgignore_global
@@ -57,6 +58,7 @@
 .m2
 .markdownNavigator
 .mono
+.nimble
 .npm
 .oh-my-zsh
 .op
@@ -104,5 +106,6 @@
 .config/gtk-2.0
 .config/inkscape
 .config/jgit
+.config/kak
 .config/karabiner
 .config/xbuild
