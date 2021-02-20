@@ -106,5 +106,6 @@
 .config/gtk-2.0
 .config/inkscape
 .config/jgit
+.config/kak
 .config/karabiner
 .config/xbuild

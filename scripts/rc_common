@@ -66,7 +66,7 @@ alias cd..='cd ..'
 
 # Typing
 
-alias e=subl
+alias e=kak
 alias la='ls -lAh'
 alias ll='ls -hl'
 alias ls="ls -FG"
