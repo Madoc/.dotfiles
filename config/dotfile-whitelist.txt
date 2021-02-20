@@ -64,7 +64,6 @@
 .op
 .openjfx
 .oracle_jre_usage
-.p10k.zsh
 .p2
 .parallel
 .pdfbox.cache
@@ -108,4 +107,5 @@
 .config/jgit
 .config/kak
 .config/karabiner
+.config/starship.toml
 .config/xbuild

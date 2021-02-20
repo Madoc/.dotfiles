@@ -28,7 +28,6 @@ The user will only be notified.
 * Java versions switchable per shell, as per commands like `j11` or `j8`.
 * Pretty good global `gitignore`, [defined here](linked-home/gitignore_global).
 * Only for Zsh:
-  * [Powerlevel10k prompt](https://github.com/romkatv/powerlevel10k).
   * Run `lfcd` with <kbd>CTRL</kbd>+<kbd>O</kbd>.
   * Live [syntax highlighting](https://github.com/zsh-users/zsh-syntax-highlighting).
   * When a command takes a non-trivial time to run, the run time will be printed after it exits.

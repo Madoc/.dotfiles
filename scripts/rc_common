@@ -6,9 +6,10 @@ alias p-sync='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish syn
 
 # Ensure packages are installed
 
-which brew kak >/dev/null || {
+which brew kak starship >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   which kak >/dev/null || brew install kakoune
+  which starship >/dev/null || brew install starship
 }
 
 # Git

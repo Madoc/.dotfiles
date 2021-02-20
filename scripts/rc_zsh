@@ -20,7 +20,7 @@ setopt auto_cd # Leave out "cd" when changing to a directory.
 
 # Prompt
 
-[[ -f "$HOME/.p10k.zsh" ]] && source "$HOME/.p10k.zsh"
+eval "$(starship init zsh)"
 
 # Typing
 
