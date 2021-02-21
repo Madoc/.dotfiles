@@ -9,11 +9,6 @@ unsetopt share_history
 
 [[ -f "$HOME/.iterm2_shell_integration.zsh" ]] && source "$HOME/.iterm2_shell_integration.zsh"
 
-# Keybindings
-
-bindkey '^[[H' beginning-of-line
-bindkey '^[[F' end-of-line
-
 # Navigation
 
 plugins+=(scd) # Easily scd to recently visted directories.
