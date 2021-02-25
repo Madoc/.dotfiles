@@ -82,6 +82,7 @@
 .stack
 .SynologyDrive
 .testcontainers.properties
+.textadept
 .tooling
 .travis
 .uuid
@@ -106,7 +107,6 @@
 .config/gtk-2.0
 .config/inkscape
 .config/jgit
-.config/kak
 .config/karabiner
 .config/starship.toml
 .config/xbuild

@@ -1,6 +1,0 @@
-evaluate-commands %sh{
-  if [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
-    echo "colorscheme tomorrow-night"
-  fi
-}
-
