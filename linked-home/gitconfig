@@ -17,3 +17,5 @@
 	email = MadocDoyu@gmail.com
 [url "git@github.com:"]
 	insteadOf = https://github.com/
+[include]
+  path = ~/.dotfiles-private/config/gitconfig-private
