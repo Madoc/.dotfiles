@@ -6,4 +6,6 @@
 /linked-home/config/inkscape
 /linked-home/config/jgit
 /linked-home/config/karabiner
+/linked-home/config/micro/buffers/**
+/linked-home/config/micro/backups/**
 /linked-home/config/xbuild
