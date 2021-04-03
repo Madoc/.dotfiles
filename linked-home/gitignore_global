@@ -138,6 +138,7 @@ $RECYCLE.BIN/
 /.emacs.desktop
 /.emacs.desktop.lock
 /.tgitconfig
+/.metals
 /CVS/*
 /eshell/history
 /eshell/lastdir
