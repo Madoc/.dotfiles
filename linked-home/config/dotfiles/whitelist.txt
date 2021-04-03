@@ -29,6 +29,7 @@
 .docker
 .dotfiles
 .dotfiles-private
+.dotty_history
 .dropbox
 .eclipse
 .emulator_console_auth_token
@@ -109,4 +110,5 @@
 .config/karabiner
 .config/micro
 .config/starship.toml
+.config/Unreal Engine
 .config/xbuild
