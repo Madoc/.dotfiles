@@ -36,6 +36,7 @@
 .gem
 .ghc
 .gitconfig
+.gitflow_export
 .gitignore_global
 .gitkraken
 .gnome2
@@ -94,6 +95,7 @@
 .zinc
 .zprofile
 .zsh_history
+.zsh_sessions
 .zshenv
 .zshrc
 
@@ -106,6 +108,7 @@
 .config/filezilla
 .config/gtk-2.0
 .config/inkscape
+.config/iterm2
 .config/jgit
 .config/karabiner
 .config/micro
