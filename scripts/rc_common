@@ -4,11 +4,16 @@ alias p-pull='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish pul
 alias p-status='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish status'
 alias p-sync='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish sync'
 
+# Nix
+
+if [ -e /Users/madoc/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/madoc/.nix-profile/etc/profile.d/nix.sh; fi
+
 # Ensure packages are installed
 
-which brew micro starship >/dev/null || {
+which brew micro nix-env starship >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   which micro >/dev/null || brew install micro
+  which nix-env >/dev/null || sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
   which starship >/dev/null || brew install starship
 }
 

@@ -61,6 +61,9 @@
 .markdownNavigator
 .mono
 .nimble
+.nix-channels
+.nix-defexpr
+.nix-profile
 .npm
 .oh-my-zsh
 .op
