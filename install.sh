@@ -14,7 +14,7 @@ ensure_link() {
 
   source_link=$(realpath "${source_file}")
   target_link=$(readlink "${target_file}")
-  if [[ -f "$target_file" && "${source_link}" == "${target_link}" ]]; then
+  if [[ -e "$target_file" && "${source_link}" == "${target_link}" ]]; then
     true
   else
     ln -si "${source_file}" "${target_file}"
@@ -27,6 +27,10 @@ realpath() {
     echo $(cd "$folder"; pwd)/$(basename "$path");
 }
 
+custom_links() {
+  [[ -d "${HOME}/bin" ]] && ensure_link "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/subl"
+}
+
 main() {
   for linked_file in "${HOME}/.dotfiles/linked-home/"*; do
     base_name=$(basename "${linked_file}")
@@ -34,6 +38,8 @@ main() {
       ensure_link "${linked_file}" "${HOME}/.${base_name}"
     fi
   done
+
+  custom_links
 
   "${HOME}/.dotfiles/util/check-dotfiles.sh"
 }

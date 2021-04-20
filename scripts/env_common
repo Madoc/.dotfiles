@@ -1,3 +1,7 @@
+# Editor
+
+EDITOR="subl -n -w"
+
 # History
 
 HISTCONTROL=ignoreboth:ignorespace
