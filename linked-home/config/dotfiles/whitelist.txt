@@ -29,6 +29,7 @@
 .docker
 .dotfiles
 .dotfiles-private
+.dotnet
 .dotty_history
 .dropbox
 .eclipse
@@ -71,6 +72,7 @@
 .oracle_jre_usage
 .p2
 .parallel
+.plastic4
 .pdfbox.cache
 .profile
 .putty
