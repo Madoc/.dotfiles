@@ -9,4 +9,6 @@
 /linked-home/config/karabiner
 /linked-home/config/micro/buffers/**
 /linked-home/config/micro/backups/**
+/linked-home/config/NuGet
+/linked-home/config/stetic
 /linked-home/config/xbuild

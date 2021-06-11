@@ -51,6 +51,7 @@
 .history
 .idea-build
 .ideaLibSources
+.IdentityService
 .install4j
 .iterm2
 .iterm2_shell_integration.zsh
@@ -67,6 +68,7 @@
 .nix-profile
 .npm
 .oh-my-zsh
+.omnisharp
 .op
 .openjfx
 .oracle_jre_usage
@@ -89,6 +91,7 @@
 .stack
 .SynologyDrive
 .testcontainers.properties
+.thumbnails
 .tooling
 .travis
 .uuid
@@ -117,6 +120,8 @@
 .config/jgit
 .config/karabiner
 .config/micro
+.config/NuGet
+.config/stetic
 .config/starship.toml
 .config/Unreal Engine
 .config/xbuild
