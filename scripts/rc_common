@@ -10,11 +10,12 @@ if [ -e /Users/madoc/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/madoc/.n
 
 # Ensure packages are installed
 
-which brew micro nix-env starship >/dev/null || {
+which brew emacs nix-env starship wget >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  which micro >/dev/null || brew install micro
+  which emacs >/dev/null || brew install emacs
   which nix-env >/dev/null || sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
   which starship >/dev/null || brew install starship
+  which wget >/dev/null || brew install wget
 }
 
 # Git
