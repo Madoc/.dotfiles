@@ -33,6 +33,9 @@
 .dotty_history
 .dropbox
 .eclipse
+.emacs
+.emacs.d
+.emacs~
 .emulator_console_auth_token
 .gem
 .ghc
@@ -56,6 +59,7 @@
 .iterm2
 .iterm2_shell_integration.zsh
 .ivy2
+.jgitconfig
 .kube
 .lesshst
 .local
@@ -67,6 +71,7 @@
 .nix-defexpr
 .nix-profile
 .npm
+.octave_hist
 .oh-my-zsh
 .omnisharp
 .op
@@ -121,6 +126,7 @@
 .config/karabiner
 .config/micro
 .config/NuGet
+.config/octave
 .config/stetic
 .config/starship.toml
 .config/Unreal Engine
