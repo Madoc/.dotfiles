@@ -9,13 +9,6 @@ HISTFILE="$HOME/.history"
 HISTSIZE=1000
 SAVEHIST=1000
 
-# Java
-
-JAVA_08_HOME="`/usr/libexec/java_home -v 1.8`"
-JAVA_11_HOME="$HOME/bin/shared/java/v11"
-JAVA_12_HOME="$HOME/bin/shared/java/v12"
-JAVA_HOME="$JAVA_11_HOME"
-
 # Rust
 
 CARGO_HOME="$HOME/.cargo"
@@ -27,7 +20,7 @@ SBT_OPTS='-Xmx8G -XX:ReservedCodeCacheSize=2G -XX:MaxMetaspaceSize=1G -Xss4m'
 
 # SDKMAN
 
-SDKMAN_DIR="$HOME/.sdkman"
+SDKMAN_DIR="$HOME/.config/sdkman"
 
 # Finally: paths
 

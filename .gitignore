@@ -10,5 +10,13 @@
 /linked-home/config/micro/buffers/**
 /linked-home/config/micro/backups/**
 /linked-home/config/NuGet
+/linked-home/config/sdkman/archives
+/linked-home/config/sdkman/bin
+/linked-home/config/sdkman/candidates
+/linked-home/config/sdkman/contrib
+/linked-home/config/sdkman/ext
+/linked-home/config/sdkman/src
+/linked-home/config/sdkman/tmp
+/linked-home/config/sdkman/var
 /linked-home/config/stetic
 /linked-home/config/xbuild

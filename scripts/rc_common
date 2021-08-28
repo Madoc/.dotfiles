@@ -8,14 +8,19 @@ alias p-sync='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish syn
 
 if [ -e /Users/madoc/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/madoc/.nix-profile/etc/profile.d/nix.sh; fi
 
+# SDKMan
+
+[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+
 # Ensure packages are installed
 
-which brew dateconv emacs nix-env octave starship wget >/dev/null || {
+which brew dateconv emacs nix-env octave sdk starship wget >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   which dateconv >/dev/null || brew install dateutils
   which emacs >/dev/null || brew install emacs
   which nix-env >/dev/null || sh <(curl -L https://nixos.org/nix/install) --darwin-use-unencrypted-nix-store-volume
   which octave >/dev/null || brew install octave
+  which sdk >/dev/null || { /bin/bash -c "$(curl -fsSL https://get.sdkman.io)" && source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java 16.0.1.j9-adpt && sdk use java 16.0.1.j9-adpt >/dev/null && sdk default java 16.0.1.j9-adpt; }
   which starship >/dev/null || brew install starship
   which wget >/dev/null || brew install wget
 }
@@ -44,10 +49,9 @@ alias greb='git rebase'
 
 # Java
 
-alias j8="export JAVA_HOME=\"$JAVA_08_HOME\"; java -version"
-alias j11="export JAVA_HOME=\"$JAVA_11_HOME\"; java -version"
-alias j12="export JAVA_HOME=\"$JAVA_12_HOME\"; java -version"
-export JAVA_HOME
+alias j8="sdk install java 8.0.292.j9-adpt && sdk use java 8.0.292.j9-adpt"
+alias j11="sdk install java 11.0.11.j9-adpt && sdk use java 11.0.11.j9-adpt"
+alias j16="sdk use java 16.0.1.j9-adpt"
 
 # Maintenance
 
@@ -65,10 +69,6 @@ alias cd..='cd ..'
 # Private
 
 [[ -f "$HOME/.dotfiles-private/scripts/post_rc" ]] && source "$HOME/.dotfiles-private/scripts/post_rc"
-
-# SDKMan
-
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 # Travis
 
