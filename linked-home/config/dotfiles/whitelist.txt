@@ -90,7 +90,6 @@
 .scalac
 .scalaide
 .scdhistory
-.sdkman
 .sh_history
 .ssh
 .stack
