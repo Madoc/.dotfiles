@@ -1,4 +1,4 @@
-plugins+=(command-time osx)
+plugins+=(command-time macos)
 
 # History
 
