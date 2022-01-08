@@ -90,6 +90,7 @@
 .scalac
 .scalaide
 .scdhistory
+.sdkman
 .sh_history
 .ssh
 .stack
@@ -126,7 +127,6 @@
 .config/micro
 .config/NuGet
 .config/octave
-.config/sdkman
 .config/stetic
 .config/starship.toml
 .config/Unreal Engine
