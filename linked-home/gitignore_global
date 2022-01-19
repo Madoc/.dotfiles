@@ -18,6 +18,7 @@ $RECYCLE.BIN/
 *.ppk
 *.rkt.bak
 *.rkt~
+*.semanticdb
 *.stTheme.cache
 *.stackdump
 *.sublime-workspace
