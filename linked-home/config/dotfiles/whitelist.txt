@@ -2,6 +2,7 @@
 # First, the dotfiles in the home directory.
 # The files under `.config` follow further below.
 
+.asdf
 .bash_history
 .bash_profile
 .bashrc

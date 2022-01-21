@@ -1,5 +1,9 @@
 plugins+=(command-time macos)
 
+# ASDF
+
+plugins+=(asdf)
+
 # History
 
 setopt hist_find_no_dups hist_ignore_dups hist_ignore_space
