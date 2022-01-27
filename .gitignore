@@ -10,6 +10,7 @@
 /linked-home/config/micro/buffers/**
 /linked-home/config/micro/backups/**
 /linked-home/config/NuGet
+/linked-home/config/nuplan
 /linked-home/config/sdkman/archives
 /linked-home/config/sdkman/bin
 /linked-home/config/sdkman/candidates
