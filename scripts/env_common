@@ -11,8 +11,8 @@ SAVEHIST=1000
 
 # Rust
 
-CARGO_HOME="$HOME/.cargo"
-RUSTUP_HOME="$HOME/.rustup"
+CARGO_HOME="$HOME/.config/cargo"
+RUSTUP_HOME="$HOME/.config/rustup"
 
 # SBT
 

@@ -117,6 +117,7 @@
 
 .config/.mono
 .config/Battle.net
+.config/cargo
 .config/configstore
 .config/dotfiles
 .config/filezilla
@@ -128,6 +129,7 @@
 .config/micro
 .config/NuGet
 .config/octave
+.config/rustup
 .config/stetic
 .config/starship.toml
 .config/Unreal Engine

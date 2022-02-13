@@ -18,13 +18,14 @@ if [ -e /Users/madoc/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/madoc/.n
 
 # Ensure packages are installed
 
-which asdf brew dateconv emacs octave sdk starship wget >/dev/null || {
+which asdf brew dateconv emacs octave rustc sdk starship wget >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   which asdf >/dev/null || brew install asdf
   which dateconv >/dev/null || brew install dateutils
   which emacs >/dev/null || brew install emacs
   which octave >/dev/null || brew install octave
+  which rust >/dev/null || { curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; }
   which sdk >/dev/null || { /bin/bash -c "$(curl -fsSL https://get.sdkman.io)" && source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java 16.0.1.j9-adpt && sdk use java 16.0.1.j9-adpt >/dev/null && sdk default java 16.0.1.j9-adpt; }
   which starship >/dev/null || brew install starship
   which wget >/dev/null || brew install wget

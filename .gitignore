@@ -1,5 +1,6 @@
 /linked-home/config/.mono
 /linked-home/config/Battle.net
+/linked-home/config/cargo
 /linked-home/config/configstore
 /linked-home/config/filezilla
 /linked-home/config/gtk-2.0
@@ -11,6 +12,7 @@
 /linked-home/config/micro/backups/**
 /linked-home/config/NuGet
 /linked-home/config/nuplan
+/linked-home/config/rustup
 /linked-home/config/sdkman/archives
 /linked-home/config/sdkman/bin
 /linked-home/config/sdkman/candidates
