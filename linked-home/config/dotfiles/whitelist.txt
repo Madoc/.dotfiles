@@ -23,6 +23,7 @@
 .bintray
 .bundle
 .cache
+.choosenim
 .config
 .cups
 .dircolors
@@ -33,7 +34,9 @@
 .dotnet
 .dotty_history
 .dropbox
+.dsda-doom
 .eclipse
+.elm
 .emacs
 .emacs.d
 .emacs~

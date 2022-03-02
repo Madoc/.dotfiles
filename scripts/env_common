@@ -30,6 +30,7 @@ MANPATH=$MANPATH:/opt/local/share/man
 
 PATH=$PATH:\
 $CARGO_HOME/bin:\
+$HOME/.nimble/bin:\
 $HOME/bin:\
 $HOME/bin/shared:\
 $HOME/bin/shared/confluent/bin:\
