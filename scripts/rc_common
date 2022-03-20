@@ -79,6 +79,13 @@ alias cd..='cd ..'
 
 [[ -f "$HOME/.dotfiles-private/scripts/post_rc" ]] && source "$HOME/.dotfiles-private/scripts/post_rc"
 
+# Terminal size
+
+# Fix for JetBrains terminal sometimes not setting the terminal dimensions when restoring a project:
+if [[ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' && `stty size` = '0 0' ]]; then
+  stty cols 248
+fi
+
 # Travis
 
 [[ -f "$HOME/.travis/travis.sh" ]] && source "$HOME/.travis/travis.sh"
