@@ -43,4 +43,6 @@ $HOME/bin/shared/zig:\
 $HOME/Library/Python/2.7/bin:\
 /Library/Frameworks/Python.framework/Versions/Current/bin:\
 /opt/local/bin:\
-/opt/local/sbin
+/opt/local/sbin:\
+/opt/homebrew/bin
+
