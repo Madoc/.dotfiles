@@ -1,32 +1,103 @@
-set nocompatible
+set autoindent
+set autoread " Automatically reload a file when it was changed from the outside, see also `au` below.
 set background=dark
-syntax on
-set backspace=indent,eol,start
-set backup
-set backupdir=~/.vim/backup
-set directory=~/.vim/tmp
+set backspace=eol,indent,start " Make backspace behave as it should.
+set confirm " Ask for confirmation when closing an unsaved file.
+set cursorline " Underline the cursor's current line.
+set cursorcolumn " Highlight the cursor's current column.
+set encoding=utf8 " Default to UTF-8 file encoding.
+set expandtab " Expand tabs to spaces.
 set fileformats=mac,unix,dos
-set mouse=a
-set cursorline
-set ruler
-set laststatus=2
-set showmatch
-set incsearch
-set ignorecase
-set smartcase
+set foldcolumn=1 " Left margin.
+set foldenable " Enable folding.
+set foldlevelstart=99 " Don't fold anything by default.
+set foldnestmax=10 " Guard against too many folds.
+set foldmethod=syntax " Fold based on syntax.
+set hid " Hide a buffer when it is abandoned.
+set history=1000 " Keep a big local command history.
+set hlsearch " Highlight search matches.
+set ignorecase " Search ignores case.
+set incsearch " Search just like the browsers do.
+set laststatus=2 " Always display the status bar.
+set lazyredraw " No redrawing of the screen while a macro executes.
+set linebreak " No redrawing of the screen while a macro executes.
+set mat=2 " How long to blink when showing a matching bracket, in tenths of seconds.
+set mouse=a " Enable mouse support.
+set nobackup " Disable backup, because most of us use version control anyways.
+set nocompatible " Some systems might by default set Vi to compatible mode, so let's prevent that.
+set noerrorbells " Disable audible bell on error.
+set noswapfile " Disable swap file.
+set novisualbell " Disable visual alert on error.
+set nowb " Again, no backup.
+set number " Show line numbers.
+set pastetoggle=<F12>
+set ruler " Show current cursor position.
+set scrolloff=4 " How many lines to show at least above and below the cursor.
+set shiftwidth=2 " One tab expands to two spaces.
+set showmatch " Highlight matching brackets, see also `mat`.
+set si " Highlight matching brackets, see also `mat`.
+set sidescrolloff=5 " How many columns to show at least to the left and right of the cursor.
+set smartcase " Smart behavior regarding case while searching.
+set smarttab " Smart usage of tabs.
+set so=7 " How many lines the cursor skips with j/k
+set softtabstop=2 " One tab expands to two spaces.
+set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
+set tabstop=2 " One tab expands to two spaces.
+set title " Update the terminal window title.
+set whichwrap+=<,>,h,l
 set wildmenu
 set wildmode=list:longest:full
-set whichwrap=b,s,h,l,<,>,[,]
-set autoindent
-set shiftwidth=2
-set expandtab
-set softtabstop=4
-set pastetoggle=<F12>
-"set nu "line numbers
+set wrap " Visually wrap lines that are too long to fit on the screen.
+
+syntax on
 filetype plugin indent on
-set nowrap
+au FocusGained,BufEnter * checktime
+
+colorscheme desert
 
 fun! MySys()
    return "$1"
 endfun
 set runtimepath=~/.vim_runtime,~/.vim_runtime/after,\$VIMRUNTIME
+
+" GUI mode.
+if has("gui_running")
+    set guioptions-=T
+    set guioptions-=e
+    set t_Co=256
+    set guitablabel=%M\ %t
+endif
+
+" Return to last edit position when opening files.
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+" True if paste mode is enabled.
+function! HasPaste()
+    if &paste
+        return 'PASTE MODE  '
+    endif
+    return ''
+endfunction
+
+" `j` and `k` move over visual (wrapped) lines, not logical lines.
+nnoremap j gj
+nnoremap k gk
+
+" Move to beginning/end of line.
+nnoremap B ^
+nnoremap E $
+
+" Use comma as leader instead of backspace.
+let mapleader=","
+
+" `jk` as an alternative to escape. (Doesn't work for me, but hey.)
+inoremap jk <esc>
+
+" Allows cursor change in tmux mode.
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
