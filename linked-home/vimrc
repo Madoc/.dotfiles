@@ -91,7 +91,7 @@ nnoremap E $
 let mapleader=","
 
 " `jk` as an alternative to escape. (Doesn't work for me, but hey.)
-inoremap jk <esc>
+imap jk <esc>
 
 " Allows cursor change in tmux mode.
 if exists('$TMUX')
