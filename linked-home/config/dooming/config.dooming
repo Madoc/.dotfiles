@@ -1,0 +1,19 @@
+sourcePort GZDoom {
+	executable "/Applications/GZDoom.app/Contents/MacOS/gzdoom"
+	launcher dooming.launch.Launcher$ZDoom
+}
+
+iwad Doom1 {
+	wadFile "/Users/madoc/Documents/Shared/Gaming/Doom/IWAD/doom.wad"
+}
+
+launchConfig Doom1 {
+	name "Vanilla Doom 1"
+	sourcePort GZDoom
+	iwad Doom1
+	set noMusic
+}
+
+setup main {
+	launchConfig Doom1 shortCode "vd1"
+}
