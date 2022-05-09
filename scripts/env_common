@@ -11,8 +11,8 @@ SAVEHIST=1000
 
 # Rust
 
-CARGO_HOME="$HOME/.config/cargo"
-RUSTUP_HOME="$HOME/.config/rustup"
+export CARGO_HOME="$HOME/.config/cargo"
+export RUSTUP_HOME="$HOME/.config/rustup"
 
 # SBT
 
@@ -20,7 +20,7 @@ SBT_OPTS='-Xmx8G -XX:ReservedCodeCacheSize=2G -XX:MaxMetaspaceSize=1G -Xss4m'
 
 # SDKMAN
 
-SDKMAN_DIR="$HOME/.sdkman"
+export SDKMAN_DIR="$HOME/.sdkman"
 
 # Finally: paths
 
