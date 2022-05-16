@@ -9,6 +9,10 @@ HISTFILE="$HOME/.history"
 HISTSIZE=1000
 SAVEHIST=1000
 
+# pkg-config
+
+export PKG_CONFIG_PATH="/usr/local/share/pkgconfig"
+
 # Rust
 
 export CARGO_HOME="$HOME/.config/cargo"
