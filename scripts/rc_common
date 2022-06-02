@@ -12,13 +12,18 @@ alias p-sync='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish syn
 
 if [ -e /Users/madoc/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/madoc/.nix-profile/etc/profile.d/nix.sh; fi
 
+# NVM
+
+export NVM_DIR="${HOME}/.config/nvm"
+. $(brew --prefix nvm)/nvm.sh || true
+
 # SDKMan
 
 [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
 
 # Ensure packages are installed
 
-which asdf brew dateconv emacs gh go node octave rustc sdk starship wget >/dev/null || {
+which asdf brew dateconv emacs gh go nvm octave rustc sdk starship wget >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   which asdf >/dev/null || brew install asdf
@@ -26,7 +31,7 @@ which asdf brew dateconv emacs gh go node octave rustc sdk starship wget >/dev/n
   which emacs >/dev/null || brew install emacs
   which gh >/dev/null || brew install gh
   which go >/dev/null || brew install go
-  which node > /dev/null || brew install node
+  which nvm >/dev/null || { { brew rm node || true } ; { brew rm npm || true } ; brew install nvm ; mkdir -p "${HOME}/.config/nvm" }
   which octave >/dev/null || brew install octave
   which rust >/dev/null || { curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; }
   which sdk >/dev/null || { /bin/bash -c "$(curl -fsSL https://get.sdkman.io)" && source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java 16.0.1.j9-adpt && sdk use java 16.0.1.j9-adpt >/dev/null && sdk default java 16.0.1.j9-adpt; }
