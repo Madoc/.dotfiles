@@ -23,7 +23,7 @@ export NVM_DIR="${HOME}/.config/nvm"
 
 # Ensure packages are installed
 
-which asdf brew dateconv emacs gh go nvm octave rustc sdk starship wget >/dev/null || {
+which asdf brew dateconv emacs gh go neovide nvim nvm octave rustc sdk starship wget >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   which asdf >/dev/null || brew install asdf
@@ -31,6 +31,8 @@ which asdf brew dateconv emacs gh go nvm octave rustc sdk starship wget >/dev/nu
   which emacs >/dev/null || brew install emacs
   which gh >/dev/null || brew install gh
   which go >/dev/null || brew install go
+  which neovide >/dev/null || brew install --cask neovide
+  which nvim >/dev/null || brew install neovim
   which nvm >/dev/null || { { brew rm node || true } ; { brew rm npm || true } ; brew install nvm ; mkdir -p "${HOME}/.config/nvm" }
   which octave >/dev/null || brew install octave
   which rust >/dev/null || { curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; }

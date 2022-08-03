@@ -4,6 +4,7 @@
 /linked-home/config/configstore
 /linked-home/config/filezilla
 /linked-home/config/gh/hosts.yml
+/linked-home/config/github-copilot
 /linked-home/config/gtk-2.0
 /linked-home/config/inkscape
 /linked-home/config/iterm2
@@ -13,6 +14,7 @@
 /linked-home/config/micro/backups/**
 /linked-home/config/NuGet
 /linked-home/config/nuplan
+/linked-home/config/nvm
 /linked-home/config/rustup
 /linked-home/config/sdkman/archives
 /linked-home/config/sdkman/bin

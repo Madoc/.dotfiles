@@ -75,6 +75,7 @@
 .nix-defexpr
 .nix-profile
 .npm
+.npmrc
 .octave_hist
 .oh-my-zsh
 .omnisharp
@@ -119,11 +120,15 @@
 # Whitelist for $HOME/.config:
 
 .config/.mono
+.config/awepath
 .config/Battle.net
 .config/cargo
 .config/configstore
 .config/dotfiles
+.config/dooming
 .config/filezilla
+.config/gh
+.config/github-copilot
 .config/gtk-2.0
 .config/inkscape
 .config/iterm2
@@ -131,6 +136,7 @@
 .config/karabiner
 .config/micro
 .config/NuGet
+.config/nvm
 .config/octave
 .config/rustup
 .config/stetic
