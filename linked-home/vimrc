@@ -13,6 +13,7 @@ set foldenable " Enable folding.
 set foldlevelstart=99 " Don't fold anything by default.
 set foldnestmax=10 " Guard against too many folds.
 set foldmethod=syntax " Fold based on syntax.
+set guifont=PragmataProMonoLiga\ Nerd\ Font:h18
 set hid " Hide a buffer when it is abandoned.
 set history=1000 " Keep a big local command history.
 set hlsearch " Highlight search matches.
