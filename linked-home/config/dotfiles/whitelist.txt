@@ -136,6 +136,7 @@
 .config/karabiner
 .config/micro
 .config/NuGet
+.config/nvim
 .config/nvm
 .config/octave
 .config/rustup

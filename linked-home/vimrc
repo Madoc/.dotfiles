@@ -54,6 +54,8 @@ filetype plugin indent on
 au FocusGained,BufEnter * checktime
 
 colorscheme desert
+:highlight CursorColumn guibg=#404040
+:highlight CursorLine guibg=#404040
 
 fun! MySys()
    return "$1"
