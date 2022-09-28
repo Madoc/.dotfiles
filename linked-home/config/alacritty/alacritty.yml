@@ -1,0 +1,18 @@
+live_config_reload: true
+
+font:
+  normal:
+    family: "PragmataProMonoLiga Nerd Font"
+  bold: {style: Regular}
+  italic: {style: Regular}
+  bold_italic: {style: Regular}
+  size: 18.0
+  builtin_box_drawing: true
+
+draw_bold_text_with_bright_colors: true
+
+cursor:
+  style:
+    shape: Block
+
+alt_send_esc: true

@@ -19,6 +19,7 @@ set history=1000 " Keep a big local command history.
 set hlsearch " Highlight search matches.
 set ignorecase " Search ignores case.
 set incsearch " Search just like the browsers do.
+set keymodel=startsel,stopsel " Enable text selection with shift+navigation, just like in other text editors.
 set laststatus=2 " Always display the status bar.
 set lazyredraw " No redrawing of the screen while a macro executes.
 set linebreak " No redrawing of the screen while a macro executes.
@@ -44,6 +45,7 @@ set so=7 " How many lines the cursor skips with j/k
 set softtabstop=2 " One tab expands to two spaces.
 set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l\ \ Column:\ %c
 set tabstop=2 " One tab expands to two spaces.
+set termguicolors " Enables 24-bit colors in terminal UI.
 set title " Update the terminal window title.
 set whichwrap+=<,>,h,l
 set wildmenu
@@ -57,11 +59,11 @@ au FocusGained,BufEnter * checktime
 colorscheme desert
 :highlight CursorColumn guibg=#404040
 :highlight CursorLine guibg=#404040
+:highlight NonText NONE
 
 fun! MySys()
    return "$1"
 endfun
-set runtimepath=~/.vim_runtime,~/.vim_runtime/after,\$VIMRUNTIME
 
 " GUI mode.
 if has("gui_running")
@@ -95,6 +97,57 @@ let mapleader=","
 
 " `jk` as an alternative to escape. (Doesn't work for me, but hey.)
 imap jk <esc>
+
+" Custom mappings. I configure all my tools and editors such that they share the same keybindings for certain
+" operations.
+"
+" Those mappings that use the alt modifier are defined twice because Vim/Nvim in Mac's iTerm2 does not receive the key
+" presses correctly. In iTerm2, I configure the "Normal" setting for both option keys. In order to find out how Vim
+" receives a keypress, one can try out the keypress with `sed -n l` and then replace `^[` with `<Esc>` in order to get
+" the sequence for mapping the key in Vim. For such key combos, I have defined two mappings here: the first as it would
+" be canoncially written in Vim syntax, the second for how Vim receives the keypress via iTerm2.
+"
+" All my mappings are designed to work in iTerm2 with "Normal" mode set for both option keys, and in VimR, which is a
+" NeoVim frontend app. Unfortunately, mappings involving the alt key do not work in Neovide, at least at time of
+" writing.
+"
+" Note that key combinations involving the Mac Command key (also known as logo key) do not work in iTerm2.
+
+" Wordwise movement.
+map <A-Left> b
+map <Esc>[1;9D b
+
+map <A-Right> w
+map <Esc>[1;9C w
+
+" Camel/snake case cursor movement. See: https://vi.stackexchange.com/a/13619
+let g:camelchar = "A-Z0-9_.,;:{([<`'\""
+
+noremap <silent><C-A-Left> :<C-u>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%^','bW')<CR>
+noremap <silent><A-Esc>[1;5D :<C-u>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%^','bW')<CR>
+
+noremap <silent><C-A-Right> :<C-u>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%$','W')<CR>
+noremap <silent><A-Esc>[1;9C :<C-u>call search('\C\<\<Bar>\%(^\<Bar>[^'.g:camelchar.']\@<=\)['.g:camelchar.']\<Bar>['.g:camelchar.']\ze\%([^'.g:camelchar.']\&\>\@!\)\<Bar>\%$','W')<CR>
+
+" PageUp and PageDown jump half a page.
+map <silent><PageDown> <C-D>
+map <silent><PageUp> <C-U>
+
+" Open file tree.
+map <silent><A-D-F1> :NeoTreeFocusToggle<CR>
+" TODO This one doesn't work on iTerm2:
+map <silent><A-D-Esc>[1;9P :NeoTreeFocusToggle<CR>
+
+" Expand selection.
+map <silent><A-Up> <Plug>(expand_region_expand)
+map <silent><Esc><Esc>[A <Plug>(expand_region_expand)
+
+" Split view navigation.
+" TODO Those don't work yet.
+map <C-S-Tab> <Ctrl-W>H
+map <C-Tab> <Ctrl-W>L
+
+" TODO: The mappings below need to be changed on the keyboard first.
 
 " Allows cursor change in tmux mode.
 if exists('$TMUX')

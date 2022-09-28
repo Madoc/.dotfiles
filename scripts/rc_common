@@ -23,10 +23,11 @@ export NVM_DIR="${HOME}/.config/nvm"
 
 # Ensure packages are installed
 
-which asdf brew dateconv emacs gh go htop lazygit neovide nvim nvm octave rg rustc sdk starship wget >/dev/null || {
+which asdf brew cs dateconv emacs gh go htop lazygit neovide nvim nvm octave rg rustc sdk starship wget >/dev/null || {
   which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
   which asdf >/dev/null || brew install asdf
+  which cs >/dev/null || { brew install coursier/formulas/coursier ; cs setup }
   which dateconv >/dev/null || brew install dateutils
   which emacs >/dev/null || brew install emacs
   which gh >/dev/null || brew install gh

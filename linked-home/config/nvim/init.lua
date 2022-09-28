@@ -1,8 +1,19 @@
-HOME = os.getenv("HOME")
+-- Skip initialization if Packer is not present. In that case, install it instead.
+if not require("madoc.ensure_packer")() then return end
 
-vim.cmd("source " .. HOME .. "/.vimrc")
+-- Global variables needed by other scripts.
+require "madoc.globals"
 
-if vim.g.neovide then
-  vim.g.neovide_cursor_vfx_mode = "railgun"
-  vim.g.neovide_remember_window_size = true
-end
+-- Honor the `.vimrc` too.
+require "madoc.load_vimrc"
+
+-- Time to load the plugins.
+require "madoc.plugins"
+
+-- Specific settings for Neovide.
+require "madoc.neovide"
+
+-- LSP and Scala-Metals.
+
+vim.opt_global.completeopt = { "menuone", "noinsert", "noselect" }
+vim.opt_global.shortmess:remove("F"):append("c")
