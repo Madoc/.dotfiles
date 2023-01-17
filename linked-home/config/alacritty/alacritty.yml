@@ -16,3 +16,10 @@ cursor:
     shape: Block
 
 alt_send_esc: true
+
+shell:
+  program: /opt/homebrew/bin/tmux
+
+key_bindings:
+  - { key: Tab, mods: Control, chars: "\x02n" } # tmux next window: Ctrl-B n
+  - { key: Tab, mods: Control|Shift, chars: "\x02p" } # tmux previous window: Ctrl-B p
