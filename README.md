@@ -73,6 +73,7 @@ The user will only be notified.
 * `.dotfiles/util/bootstrap.sh`:
   Host-aware bootstrap entry point.
   On macOS it installs the baseline tools expected by the dotfiles.
+  On NixOS it installs and configures the shared SDKMAN! JVM layer.
 * `.dotfiles/util/maintain-zsh-plugins.sh`:
   Clones missing Zsh plugins.
 

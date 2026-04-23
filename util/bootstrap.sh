@@ -11,10 +11,7 @@ case "${DOTFILES_PLATFORM}" in
     exec "$HOME/.dotfiles/util/bootstrap-macos.sh"
     ;;
   nixos)
-    cat <<'EOF'
-No standalone bootstrap is defined for NixOS.
-Install the required baseline tools declaratively through nixos-setup.
-EOF
+    exec "$HOME/.dotfiles/util/bootstrap-nixos.sh"
     ;;
   linux)
     cat <<'EOF'

@@ -59,11 +59,9 @@ alias greb='git rebase'
 
 # Java
 
-alias j8="sdk install java 8.0.292.j9-adpt && sdk use java 8.0.292.j9-adpt"
-alias j11="sdk install java 11.0.11.j9-adpt && sdk use java 11.0.11.j9-adpt"
-alias j16="sdk use java 16.0.1.j9-adpt"
-
-alias j11s="sdk install java 11.0.13-sapmchn && sdk use java 11.0.13-sapmchn"
+alias jdefault="sdk install java ${DOTFILES_DEFAULT_JAVA_VERSION} && sdk default java ${DOTFILES_DEFAULT_JAVA_VERSION}"
+alias juse="sdk install java ${DOTFILES_DEFAULT_JAVA_VERSION} && sdk use java ${DOTFILES_DEFAULT_JAVA_VERSION}"
+alias jcurrent="sdk current java"
 
 # Maintenance
 

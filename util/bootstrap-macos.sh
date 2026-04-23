@@ -5,6 +5,7 @@
 set -euo pipefail
 
 source "$HOME/.dotfiles/scripts/host_common"
+source "$HOME/.dotfiles/scripts/env_common"
 
 dotfiles_is_macos || {
   echo "bootstrap-macos.sh is only meant for macOS." >&2
@@ -27,13 +28,27 @@ command -v nvm >/dev/null || { { brew rm node || true; } ; { brew rm npm || true
 command -v octave >/dev/null || brew install octave
 command -v rg >/dev/null || brew install ripgrep
 command -v rustc >/dev/null || { curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; }
-command -v sdk >/dev/null || {
-  /bin/bash -c "$(curl -fsSL https://get.sdkman.io)"
-  source "$HOME/.sdkman/bin/sdkman-init.sh"
-  sdk install java 16.0.1.j9-adpt
-  sdk use java 16.0.1.j9-adpt >/dev/null
-  sdk default java 16.0.1.j9-adpt
-}
+command -v sdk >/dev/null || /bin/bash -c "$(curl -fsSL https://get.sdkman.io)"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+if command -v sdk >/dev/null; then
+  sdk install java "$DOTFILES_DEFAULT_JAVA_VERSION" || true
+  sdk default java "$DOTFILES_DEFAULT_JAVA_VERSION" || true
+  config_file="$HOME/.sdkman/etc/config"
+  mkdir -p "$(dirname "$config_file")"
+  if [[ -f "$config_file" ]]; then
+    if grep -q '^sdkman_auto_env=' "$config_file"; then
+      sed -i.bak 's/^sdkman_auto_env=.*/sdkman_auto_env=true/' "$config_file"
+    else
+      printf '
+sdkman_auto_env=true
+' >> "$config_file"
+    fi
+  else
+    printf 'sdkman_auto_env=true
+' > "$config_file"
+  fi
+fi
+command -v sbt >/dev/null || brew install sbt
 command -v starship >/dev/null || brew install starship
 command -v tmux >/dev/null || brew install tmux
 command -v wget >/dev/null || brew install wget
