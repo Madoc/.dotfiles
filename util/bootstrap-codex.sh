@@ -13,4 +13,5 @@ if ! command -v npm >/dev/null 2>&1; then
 fi
 
 mkdir -p "$NPM_CONFIG_PREFIX"
+npm install -g "npm@$DOTFILES_DEFAULT_NPM_VERSION"
 npm install -g @openai/codex

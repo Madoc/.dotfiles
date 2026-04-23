@@ -41,6 +41,7 @@ SBT_OPTS='-Xmx8G -XX:ReservedCodeCacheSize=2G -XX:MaxMetaspaceSize=1G -Xss4m'
 
 export SDKMAN_DIR="$HOME/.sdkman"
 export DOTFILES_DEFAULT_JAVA_VERSION="${DOTFILES_DEFAULT_JAVA_VERSION:-26-tem}"
+export DOTFILES_DEFAULT_NPM_VERSION="${DOTFILES_DEFAULT_NPM_VERSION:-11.13.0}"
 
 # Finally: paths
 
