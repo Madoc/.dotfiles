@@ -1,5 +1,6 @@
 !/linked-home/config/zed/settings.json
 !/linked-home/config/zed/themes/**
+/.auto-update-timestamp~
 /linked-home/config/.mono
 /linked-home/config/Battle.net
 /linked-home/config/GameMakerStudio2

@@ -2,27 +2,29 @@
 # First, the dotfiles in the home directory.
 # The files under `.config` follow further below.
 
-.asdf
-.bash_history
-.bash_profile
-.bashrc
 .Box_EngineServer
 .Box_StreemToSync
 .Box_SyncToStreem
 .Box_UIServer
-.byobu
-.cargo
 .CFUserTextEncoding
 .CloudStation
+.IdentityService
+.SynologyDrive
 .Trash
 .Xauthority
 .adobe
 .android
+.asdf
 .atom
 .aws
+.bash_history
+.bash_profile
+.bashrc
 .bintray
 .bundle
+.byobu
 .cache
+.cargo
 .choosenim
 .config
 .cups
@@ -58,7 +60,6 @@
 .history
 .idea-build
 .ideaLibSources
-.IdentityService
 .install4j
 .iterm2
 .iterm2_shell_integration.zsh
@@ -84,8 +85,8 @@
 .oracle_jre_usage
 .p2
 .parallel
-.plastic4
 .pdfbox.cache
+.plastic4
 .profile
 .putty
 .rustup
@@ -99,9 +100,10 @@
 .sh_history
 .ssh
 .stack
-.SynologyDrive
+.terminfo
 .testcontainers.properties
 .thumbnails
+.tmux.conf
 .tooling
 .travis
 .uuid
@@ -120,12 +122,15 @@
 # Whitelist for $HOME/.config:
 
 .config/.mono
-.config/awepath
 .config/Battle.net
+.config/NuGet
+.config/Unreal Engine
+.config/alacritty
+.config/awepath
 .config/cargo
 .config/configstore
-.config/dotfiles
 .config/dooming
+.config/dotfiles
 .config/filezilla
 .config/gh
 .config/github-copilot
@@ -135,13 +140,13 @@
 .config/jgit
 .config/karabiner
 .config/micro
-.config/NuGet
 .config/nvim
 .config/nvm
 .config/octave
+.config/pavucontrol.ini
+.config/pulse
 .config/rustup
-.config/stetic
 .config/starship.toml
-.config/Unreal Engine
+.config/stetic
 .config/xbuild
 .config/zed

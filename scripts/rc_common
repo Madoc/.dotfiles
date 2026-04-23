@@ -87,7 +87,7 @@ alias cd..='cd ..'
 # Terminal size
 
 # Fix for JetBrains terminal sometimes not setting the terminal dimensions when restoring a project:
-if [[ "$TERMINAL_EMULATOR" = 'JetBrains-JediTerm' && `stty size` = '0 0' ]]; then
+if [[ "${TERMINAL_EMULATOR:-}" = 'JetBrains-JediTerm' && `stty size` = '0 0' ]]; then
   stty cols 248
 fi
 
