@@ -33,13 +33,36 @@ fi
 
 # SDKMan
 
-if [[ -f "$SDKMAN_DIR/etc/config" ]] && ! grep -q "^sdkman_native_enable=" "$SDKMAN_DIR/etc/config"; then
-  printf "sdkman_native_enable=false\n" >> "$SDKMAN_DIR/etc/config"
+if [[ -f "$SDKMAN_DIR/etc/config" ]]; then
+  if grep -q '^sdkman_native_enable=' "$SDKMAN_DIR/etc/config"; then
+    local_sdkman_config_tmp="$SDKMAN_DIR/etc/config.tmp.$$"
+    sed 's/^sdkman_native_enable=.*/sdkman_native_enable=false/' "$SDKMAN_DIR/etc/config" > "$local_sdkman_config_tmp" && mv "$local_sdkman_config_tmp" "$SDKMAN_DIR/etc/config"
+  else
+    printf 'sdkman_native_enable=false\n' >> "$SDKMAN_DIR/etc/config"
+  fi
 fi
 if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
   set +u
   source "$SDKMAN_DIR/bin/sdkman-init.sh"
   set -u
+
+  if typeset -f sdk >/dev/null 2>&1 && ! typeset -f __dotfiles_sdkman_sdk >/dev/null 2>&1; then
+    if [[ -n "${ZSH_VERSION:-}" ]]; then
+      functions -c sdk __dotfiles_sdkman_sdk
+    else
+      eval "$(declare -f sdk | sed '1s/^sdk[[:space:]]/__dotfiles_sdkman_sdk /')"
+    fi
+
+    sdk() {
+      local had_nounset=0
+      [[ $- == *u* ]] && had_nounset=1
+      set +u
+      __dotfiles_sdkman_sdk "$@"
+      local rc=$?
+      (( had_nounset )) && set -u
+      return $rc
+    }
+  fi
 fi
 
 # Git

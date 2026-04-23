@@ -18,17 +18,24 @@ ensure_sdkman_config() {
   if grep -q '^sdkman_auto_env=' "$config_file"; then
     sed -i 's/^sdkman_auto_env=.*/sdkman_auto_env=true/' "$config_file"
   else
-    printf '
-sdkman_auto_env=true
-' >> "$config_file"
+    printf '\nsdkman_auto_env=true\n' >> "$config_file"
   fi
 
   if grep -q '^sdkman_native_enable=' "$config_file"; then
     sed -i 's/^sdkman_native_enable=.*/sdkman_native_enable=false/' "$config_file"
   else
-    printf 'sdkman_native_enable=false
-' >> "$config_file"
+    printf 'sdkman_native_enable=false\n' >> "$config_file"
   fi
+}
+
+run_sdk() {
+  local had_nounset=0
+  [[ $- == *u* ]] && had_nounset=1
+  set +u
+  sdk "$@"
+  local rc=$?
+  (( had_nounset )) && set -u
+  return $rc
 }
 
 dotfiles_is_nixos || {
@@ -36,15 +43,21 @@ dotfiles_is_nixos || {
   exit 1
 }
 
-command -v sdk >/dev/null || bash -c "$(curl -fsSL https://get.sdkman.io)"
+if [[ ! -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
+  bash -c "$(curl -fsSL https://get.sdkman.io)"
+fi
+
 ensure_sdkman_config
+
 if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
   set +u
   source "$HOME/.sdkman/bin/sdkman-init.sh"
   set -u
 fi
 
-if command -v sdk >/dev/null; then
-  sdk install java "$DOTFILES_DEFAULT_JAVA_VERSION" || true
-  sdk default java "$DOTFILES_DEFAULT_JAVA_VERSION"
+if typeset -f sdk >/dev/null 2>&1; then
+  if [[ ! -d "$HOME/.sdkman/candidates/java/$DOTFILES_DEFAULT_JAVA_VERSION" ]]; then
+    run_sdk install java "$DOTFILES_DEFAULT_JAVA_VERSION"
+  fi
+  run_sdk default java "$DOTFILES_DEFAULT_JAVA_VERSION"
 fi
