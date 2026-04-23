@@ -33,6 +33,9 @@ fi
 
 # SDKMan
 
+if [[ -f "$SDKMAN_DIR/etc/config" ]] && ! grep -q "^sdkman_native_enable=" "$SDKMAN_DIR/etc/config"; then
+  printf "sdkman_native_enable=false\n" >> "$SDKMAN_DIR/etc/config"
+fi
 if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
   set +u
   source "$SDKMAN_DIR/bin/sdkman-init.sh"

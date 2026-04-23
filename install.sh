@@ -59,6 +59,11 @@ apply_platform_overrides() {
   done
 }
 
+ensure_git_global_excludesfile() {
+  [[ -f "${HOME}/.gitignore_global" ]] || return 0
+  git config --global core.excludesfile "${HOME}/.gitignore_global"
+}
+
 custom_links() {
   if dotfiles_is_macos && [[ -d "${HOME}/bin" ]] && [[ -x "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
     ensure_link "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/subl"
@@ -75,6 +80,7 @@ main() {
 
   custom_links
   apply_platform_overrides
+  ensure_git_global_excludesfile
 
   "${HOME}/.dotfiles/util/check-dotfiles.sh"
 }
