@@ -1,2 +1,3 @@
+source "$HOME/.dotfiles/scripts/host_common"
 source "$HOME/.dotfiles/scripts/env_common"
 source "$HOME/.dotfiles/scripts/env_zsh"

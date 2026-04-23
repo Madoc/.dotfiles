@@ -6,6 +6,8 @@
 # directory, just with a dot prepended. Links that already exist will be left unchanged, non-existing files will be
 # created, and in case of unexpected files, the user will be asked if they should be overwritten.
 
+source "${HOME}/.dotfiles/scripts/host_common"
+
 # Creates the link if it does not exist. If there is a different link or file at the target, the user will be asked
 # if it should be overwritten.
 ensure_link() {
@@ -28,7 +30,9 @@ realpath() {
 }
 
 custom_links() {
-  [[ -d "${HOME}/bin" ]] && ensure_link "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/subl"
+  if dotfiles_is_macos && [[ -d "${HOME}/bin" ]] && [[ -x "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
+    ensure_link "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/subl"
+  fi
 }
 
 main() {

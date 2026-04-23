@@ -1,6 +1,13 @@
 # Editor
 
-EDITOR="subl -n -w"
+if dotfiles_is_macos && command -v subl >/dev/null; then
+  EDITOR="subl -n -w"
+elif command -v nvim >/dev/null; then
+  EDITOR="nvim"
+else
+  EDITOR="vim"
+fi
+export EDITOR
 
 # History
 
@@ -11,7 +18,9 @@ SAVEHIST=1000
 
 # pkg-config
 
-export PKG_CONFIG_PATH="/usr/local/share/pkgconfig"
+if dotfiles_is_macos; then
+  export PKG_CONFIG_PATH="/usr/local/share/pkgconfig"
+fi
 
 # Rust
 
@@ -28,26 +37,28 @@ export SDKMAN_DIR="$HOME/.sdkman"
 
 # Finally: paths
 
-INFOPATH=$INFOPATH:/opt/local/share/info
+dotfiles_add_to_path_if_dir "$CARGO_HOME/bin"
+dotfiles_add_to_path_if_dir "$HOME/.nimble/bin"
+dotfiles_add_to_path_if_dir "$HOME/bin"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared/confluent/bin"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared/maven/bin"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared/prince"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared/sbt/bin"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared/scala/bin"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared/stack"
+dotfiles_add_to_path_if_dir "$HOME/bin/shared/zig"
 
-MANPATH=$MANPATH:/opt/local/share/man
+if dotfiles_is_macos; then
+  INFOPATH=$INFOPATH:/opt/local/share/info
+  MANPATH=$MANPATH:/opt/local/share/man
 
-PATH=$PATH:\
-$CARGO_HOME/bin:\
-$HOME/.nimble/bin:\
-$HOME/bin:\
-$HOME/bin/shared:\
-$HOME/bin/shared/confluent/bin:\
-$HOME/bin/shared/maven/bin:\
-$HOME/bin/shared/prince:\
-$HOME/bin/shared/sbt/bin:\
-$HOME/bin/shared/scala/bin:\
-$HOME/bin/shared/stack:\
-$HOME/bin/shared/zig:\
-$HOME/Library/Application\ Support/Coursier/bin:\
-$HOME/Library/Python/2.7/bin:\
-/Library/Frameworks/Python.framework/Versions/Current/bin:\
-/opt/local/bin:\
-/opt/local/sbin:\
-/opt/homebrew/bin
+  dotfiles_add_to_path_if_dir "$HOME/Library/Application Support/Coursier/bin"
+  dotfiles_add_to_path_if_dir "$HOME/Library/Python/2.7/bin"
+  dotfiles_add_to_path_if_dir "/Library/Frameworks/Python.framework/Versions/Current/bin"
+  dotfiles_add_to_path_if_dir "/opt/local/bin"
+  dotfiles_add_to_path_if_dir "/opt/local/sbin"
+  dotfiles_add_to_path_if_dir "/opt/homebrew/bin"
+fi
 
+export PATH

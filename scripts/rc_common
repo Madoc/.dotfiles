@@ -1,6 +1,14 @@
 # ASDF
 
-[[ -e /usr/local/opt/asdf/libexec/asdf.sh ]] && . /usr/local/opt/asdf/libexec/asdf.sh
+for asdf_init in \
+  /usr/local/opt/asdf/libexec/asdf.sh \
+  /opt/homebrew/opt/asdf/libexec/asdf.sh \
+  "$HOME/.asdf/asdf.sh"
+do
+  [[ -e "$asdf_init" ]] || continue
+  . "$asdf_init"
+  break
+done
 
 # Dirish
 
@@ -10,12 +18,16 @@ alias p-sync='java -jar ~/p/jd/dirish/target/dirish.jar -c ~/p/meta/p.dirish syn
 
 # Nix
 
-if [ -e /Users/madoc/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/madoc/.nix-profile/etc/profile.d/nix.sh; fi
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then . "$HOME/.nix-profile/etc/profile.d/nix.sh"; fi
 
 # NVM
 
 export NVM_DIR="${HOME}/.config/nvm"
-. $(brew --prefix nvm)/nvm.sh || true
+if [[ -s "$NVM_DIR/nvm.sh" ]]; then
+  . "$NVM_DIR/nvm.sh"
+elif dotfiles_is_macos && command -v brew >/dev/null; then
+  . "$(brew --prefix nvm)/nvm.sh" || true
+fi
 
 # SDKMan
 
@@ -23,28 +35,30 @@ export NVM_DIR="${HOME}/.config/nvm"
 
 # Ensure packages are installed
 
-which asdf brew cs dateconv emacs gh go htop lazygit neovide nvim nvm octave rg rustc sdk starship tmux wget >/dev/null || {
-  which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if dotfiles_is_macos; then
+  which asdf brew cs dateconv emacs gh go htop lazygit neovide nvim nvm octave rg rustc sdk starship tmux wget >/dev/null || {
+    which brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-  which asdf >/dev/null || brew install asdf
-  which cs >/dev/null || { brew install coursier/formulas/coursier ; cs setup }
-  which dateconv >/dev/null || brew install dateutils
-  which emacs >/dev/null || brew install emacs
-  which gh >/dev/null || brew install gh
-  which go >/dev/null || brew install go
-  which htop >/dev/null || brew install htop
-  which lazygit >/dev/null || brew install lazygit
-  which neovide >/dev/null || brew install --cask neovide
-  which nvim >/dev/null || brew install neovim
-  which nvm >/dev/null || { { brew rm node || true } ; { brew rm npm || true } ; brew install nvm ; mkdir -p "${HOME}/.config/nvm" }
-  which octave >/dev/null || brew install octave
-  which rg >/dev/null || brew install ripgrep
-  which rust >/dev/null || { curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; }
-  which sdk >/dev/null || { /bin/bash -c "$(curl -fsSL https://get.sdkman.io)" && source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java 16.0.1.j9-adpt && sdk use java 16.0.1.j9-adpt >/dev/null && sdk default java 16.0.1.j9-adpt; }
-  which starship >/dev/null || brew install starship
-  which tmux >/dev/null || brew install tmux
-  which wget >/dev/null || brew install wget
-}
+    which asdf >/dev/null || brew install asdf
+    which cs >/dev/null || { brew install coursier/formulas/coursier ; cs setup }
+    which dateconv >/dev/null || brew install dateutils
+    which emacs >/dev/null || brew install emacs
+    which gh >/dev/null || brew install gh
+    which go >/dev/null || brew install go
+    which htop >/dev/null || brew install htop
+    which lazygit >/dev/null || brew install lazygit
+    which neovide >/dev/null || brew install --cask neovide
+    which nvim >/dev/null || brew install neovim
+    which nvm >/dev/null || { { brew rm node || true } ; { brew rm npm || true } ; brew install nvm ; mkdir -p "${HOME}/.config/nvm" }
+    which octave >/dev/null || brew install octave
+    which rg >/dev/null || brew install ripgrep
+    which rust >/dev/null || { curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; }
+    which sdk >/dev/null || { /bin/bash -c "$(curl -fsSL https://get.sdkman.io)" && source "$SDKMAN_DIR/bin/sdkman-init.sh" && sdk install java 16.0.1.j9-adpt && sdk use java 16.0.1.j9-adpt >/dev/null && sdk default java 16.0.1.j9-adpt; }
+    which starship >/dev/null || brew install starship
+    which tmux >/dev/null || brew install tmux
+    which wget >/dev/null || brew install wget
+  }
+fi
 
 # Git
 
@@ -106,8 +120,18 @@ fi
 
 # Typing
 
-alias e=subl
+if command -v subl >/dev/null; then
+  alias e=subl
+elif command -v nvim >/dev/null; then
+  alias e=nvim
+else
+  alias e=vim
+fi
 alias la='ls -lAh'
 alias ll='ls -hl'
-alias ls="ls -FG"
+if dotfiles_is_macos; then
+  alias ls="ls -FG"
+else
+  alias ls="ls --color=auto -F"
+fi
 alias new-uuid='uuidgen | tr "[:upper:]" "[:lower:]"'

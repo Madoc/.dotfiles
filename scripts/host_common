@@ -1,0 +1,65 @@
+# Shared host/platform detection for shell startup.
+
+if [[ -n "${DOTFILES_HOST_COMMON_LOADED:-}" ]]; then
+  return 0
+fi
+
+DOTFILES_HOST_COMMON_LOADED=1
+
+dotfiles_detect_platform() {
+  case "$(uname -s 2>/dev/null)" in
+    Darwin)
+      echo "macos"
+      ;;
+    Linux)
+      if [[ -f /etc/os-release ]] && grep -qi 'nixos' /etc/os-release; then
+        echo "nixos"
+      else
+        echo "linux"
+      fi
+      ;;
+    *)
+      echo "unknown"
+      ;;
+  esac
+}
+
+DOTFILES_PLATFORM="$(dotfiles_detect_platform)"
+case "${DOTFILES_PLATFORM}" in
+  macos)
+    DOTFILES_OS="macos"
+    ;;
+  nixos|linux)
+    DOTFILES_OS="linux"
+    ;;
+  *)
+    DOTFILES_OS="unknown"
+    ;;
+esac
+
+DOTFILES_HOSTNAME="$(hostname -s 2>/dev/null || hostname 2>/dev/null || echo unknown)"
+
+export DOTFILES_HOST_COMMON_LOADED
+export DOTFILES_PLATFORM
+export DOTFILES_OS
+export DOTFILES_HOSTNAME
+
+dotfiles_is_macos() {
+  [[ "${DOTFILES_PLATFORM}" == "macos" ]]
+}
+
+dotfiles_is_linux() {
+  [[ "${DOTFILES_OS}" == "linux" ]]
+}
+
+dotfiles_is_nixos() {
+  [[ "${DOTFILES_PLATFORM}" == "nixos" ]]
+}
+
+dotfiles_add_to_path_if_dir() {
+  [[ -d "$1" ]] || return 0
+  case ":$PATH:" in
+    *":$1:"*) ;;
+    *) PATH="${PATH:+${PATH}:}$1" ;;
+  esac
+}
