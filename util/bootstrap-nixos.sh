@@ -12,7 +12,7 @@ dotfiles_is_nixos || {
   exit 1
 }
 
-command -v sdk >/dev/null || /bin/bash -c "$(curl -fsSL https://get.sdkman.io)"
+command -v sdk >/dev/null || bash -c "$(curl -fsSL https://get.sdkman.io)"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 if command -v sdk >/dev/null; then

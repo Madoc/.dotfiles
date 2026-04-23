@@ -12,7 +12,7 @@ dotfiles_is_macos || {
   exit 1
 }
 
-command -v brew >/dev/null || /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+command -v brew >/dev/null || bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 command -v asdf >/dev/null || brew install asdf
 command -v cs >/dev/null || { brew install coursier/formulas/coursier ; cs setup; }
@@ -28,7 +28,7 @@ command -v nvm >/dev/null || { { brew rm node || true; } ; { brew rm npm || true
 command -v octave >/dev/null || brew install octave
 command -v rg >/dev/null || brew install ripgrep
 command -v rustc >/dev/null || { curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh; }
-command -v sdk >/dev/null || /bin/bash -c "$(curl -fsSL https://get.sdkman.io)"
+command -v sdk >/dev/null || bash -c "$(curl -fsSL https://get.sdkman.io)"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 if command -v sdk >/dev/null; then
   sdk install java "$DOTFILES_DEFAULT_JAVA_VERSION" || true
