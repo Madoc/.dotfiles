@@ -16,11 +16,32 @@ ensure_link() {
   local target_file="$2"
   local source_link
   local target_link
+  local target_realpath=""
+  local source_parent_realpath
+  local target_parent_realpath=""
   local child_source
   local child_name
   local -a child_sources=()
 
-  if [[ -d "$source_file" && ( -d "$target_file" || ( -L "$target_file" && -d "$target_file" ) ) ]]; then
+  source_link=$(realpath "${source_file}")
+  source_parent_realpath=$(realpath "$(dirname "${source_file}")")
+  target_link=$(readlink "${target_file}")
+
+  if [[ -e "$target_file" ]]; then
+    target_realpath=$(realpath "${target_file}")
+    if [[ "$source_link" == "$target_realpath" ]]; then
+      return 0
+    fi
+  fi
+
+  if [[ -e "$(dirname "$target_file")" ]]; then
+    target_parent_realpath=$(realpath "$(dirname "$target_file")")
+    if [[ "$source_parent_realpath" == "$target_parent_realpath" && "$(basename "$source_file")" == "$(basename "$target_file")" ]]; then
+      return 0
+    fi
+  fi
+
+  if [[ -d "$source_file" && -d "$target_file" && ! -L "$target_file" ]]; then
     while IFS= read -r -d '' child_source; do
       child_sources+=("$child_source")
     done < <(find "$source_file" -mindepth 1 -maxdepth 1 -print0)
@@ -32,9 +53,7 @@ ensure_link() {
     return 0
   fi
 
-  source_link=$(realpath "${source_file}")
-  target_link=$(readlink "${target_file}")
-  if [[ -e "$target_file" && "${source_link}" == "${target_link}" ]]; then
+  if [[ -e "$target_file" && "$source_link" == "$target_link" ]]; then
     true
   else
     ln -si "${source_file}" "${target_file}"
@@ -59,11 +78,6 @@ apply_platform_overrides() {
   done
 }
 
-ensure_git_global_excludesfile() {
-  [[ -f "${HOME}/.gitignore_global" ]] || return 0
-  git config --global core.excludesfile "${HOME}/.gitignore_global"
-}
-
 custom_links() {
   if dotfiles_is_macos && [[ -d "${HOME}/bin" ]] && [[ -x "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
     ensure_link "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/subl"
@@ -80,7 +94,6 @@ main() {
 
   custom_links
   apply_platform_overrides
-  ensure_git_global_excludesfile
 
   "${HOME}/.dotfiles/util/check-dotfiles.sh"
 }
