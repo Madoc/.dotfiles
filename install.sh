@@ -9,10 +9,28 @@
 source "${HOME}/.dotfiles/scripts/host_common"
 
 # Creates the link if it does not exist. If there is a different link or file at the target, the user will be asked
-# if it should be overwritten.
+# if it should be overwritten. Existing directories are merged recursively so that trees like ~/.config can keep
+# their directory shape while individual files inside still come from the dotfiles repo.
 ensure_link() {
-  source_file="$1"
-  target_file="$2"
+  local source_file="$1"
+  local target_file="$2"
+  local source_link
+  local target_link
+  local child_source
+  local child_name
+  local -a child_sources=()
+
+  if [[ -d "$source_file" && ( -d "$target_file" || ( -L "$target_file" && -d "$target_file" ) ) ]]; then
+    while IFS= read -r -d '' child_source; do
+      child_sources+=("$child_source")
+    done < <(find "$source_file" -mindepth 1 -maxdepth 1 -print0)
+
+    for child_source in "${child_sources[@]}"; do
+      child_name=$(basename "$child_source")
+      ensure_link "$child_source" "$target_file/$child_name"
+    done
+    return 0
+  fi
 
   source_link=$(realpath "${source_file}")
   target_link=$(readlink "${target_file}")
