@@ -144,3 +144,4 @@
 .config/starship.toml
 .config/Unreal Engine
 .config/xbuild
+.config/zed

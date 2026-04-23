@@ -36,3 +36,5 @@
 /linked-home/config/stetic
 /linked-home/config/xbuild
 /linked-home/config/zed
+/linked-home/config/zed/embeddings
+/linked-home/config/zed/prompts
