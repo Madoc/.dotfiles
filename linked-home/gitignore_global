@@ -117,6 +117,7 @@ $RECYCLE.BIN/
 .recommenders/
 .redcar
 .sass-cache/
+.scala-build/
 .scala_dependencies
 .settings/
 .springBeans
@@ -139,8 +140,8 @@ $RECYCLE.BIN/
 /.bsp/
 /.emacs.desktop
 /.emacs.desktop.lock
-/.tgitconfig
 /.metals
+/.tgitconfig
 /CVS/*
 /eshell/history
 /eshell/lastdir
