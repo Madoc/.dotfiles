@@ -31,7 +31,7 @@ export RUSTUP_HOME="$HOME/.config/rustup"
 
 # Node / npm
 
-export NPM_CONFIG_PREFIX="$HOME/.local/share/npm"
+export DOTFILES_NPM_PREFIX="$HOME/.local/share/npm"
 
 # SBT
 
@@ -46,7 +46,6 @@ export DOTFILES_DEFAULT_NPM_VERSION="${DOTFILES_DEFAULT_NPM_VERSION:-11.13.0}"
 # Finally: paths
 
 dotfiles_add_to_path_if_dir "$CARGO_HOME/bin"
-dotfiles_add_to_path_if_dir "$NPM_CONFIG_PREFIX/bin"
 dotfiles_add_to_path_if_dir "$HOME/.nimble/bin"
 dotfiles_add_to_path_if_dir "$HOME/bin"
 dotfiles_add_to_path_if_dir "$HOME/bin/shared"

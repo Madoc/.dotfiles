@@ -121,6 +121,7 @@
 
 # Whitelist for $HOME/.config:
 
+.codex
 .config/.mono
 .config/Battle.net
 .config/NuGet
@@ -140,6 +141,7 @@
 .config/jgit
 .config/karabiner
 .config/micro
+.config/mozilla
 .config/nvim
 .config/nvm
 .config/octave

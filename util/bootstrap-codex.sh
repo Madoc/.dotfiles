@@ -12,6 +12,6 @@ if ! command -v npm >/dev/null 2>&1; then
   exit 1
 fi
 
-mkdir -p "$NPM_CONFIG_PREFIX"
-npm install -g "npm@$DOTFILES_DEFAULT_NPM_VERSION"
-npm install -g @openai/codex
+mkdir -p "$DOTFILES_NPM_PREFIX"
+NPM_CONFIG_PREFIX="$DOTFILES_NPM_PREFIX" npm install -g "npm@$DOTFILES_DEFAULT_NPM_VERSION"
+NPM_CONFIG_PREFIX="$DOTFILES_NPM_PREFIX" npm install -g @openai/codex
