@@ -29,6 +29,18 @@ realpath() {
     echo $(cd "$folder"; pwd)/$(basename "$path");
 }
 
+apply_platform_overrides() {
+  overlay_root="${HOME}/.dotfiles/linked-home-platforms/${DOTFILES_PLATFORM}"
+  [[ -d "${overlay_root}" ]] || return 0
+
+  find "${overlay_root}" -type f | while read -r overlay_file; do
+    relative_path="${overlay_file#${overlay_root}/}"
+    target_file="${HOME}/.${relative_path}"
+    mkdir -p "$(dirname "${target_file}")"
+    ensure_link "${overlay_file}" "${target_file}"
+  done
+}
+
 custom_links() {
   if dotfiles_is_macos && [[ -d "${HOME}/bin" ]] && [[ -x "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" ]]; then
     ensure_link "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" "${HOME}/bin/subl"
@@ -44,6 +56,7 @@ main() {
   done
 
   custom_links
+  apply_platform_overrides
 
   "${HOME}/.dotfiles/util/check-dotfiles.sh"
 }

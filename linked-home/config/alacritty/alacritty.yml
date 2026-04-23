@@ -18,7 +18,7 @@ cursor:
 alt_send_esc: true
 
 shell:
-  program: /opt/homebrew/bin/tmux
+  program: tmux
 
 key_bindings:
   - { key: Tab, mods: Control, chars: "\x02n" } # tmux next window: Ctrl-B n
