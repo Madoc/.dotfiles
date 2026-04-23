@@ -33,7 +33,11 @@ fi
 
 # SDKMan
 
-[[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]] && source "$SDKMAN_DIR/bin/sdkman-init.sh"
+if [[ -s "$SDKMAN_DIR/bin/sdkman-init.sh" ]]; then
+  set +u
+  source "$SDKMAN_DIR/bin/sdkman-init.sh"
+  set -u
+fi
 
 # Git
 

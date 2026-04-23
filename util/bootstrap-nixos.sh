@@ -13,7 +13,11 @@ dotfiles_is_nixos || {
 }
 
 command -v sdk >/dev/null || bash -c "$(curl -fsSL https://get.sdkman.io)"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+if [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]]; then
+  set +u
+  source "$HOME/.sdkman/bin/sdkman-init.sh"
+  set -u
+fi
 
 if command -v sdk >/dev/null; then
   sdk install java "$DOTFILES_DEFAULT_JAVA_VERSION" || true
