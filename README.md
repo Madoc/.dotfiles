@@ -6,6 +6,7 @@ Best used with [Zsh](http://www.zsh.org/) and [Oh My ZSH](https://ohmyz.sh/).
 ```bash
 cd "$HOME"
 git clone git@github.com:Madoc/.dotfiles.git
+.dotfiles/util/bootstrap.sh
 .dotfiles/install.sh
 ```
 
@@ -69,6 +70,9 @@ The user will only be notified.
   Checks the given Git repository for updates and prints a message if local or remote updates are pending.
   
   This script is called up to once per day by the auto update.
+* `.dotfiles/util/bootstrap.sh`:
+  Host-aware bootstrap entry point.
+  On macOS it installs the baseline tools expected by the dotfiles.
 * `.dotfiles/util/maintain-zsh-plugins.sh`:
   Clones missing Zsh plugins.
 

@@ -1,3 +1,5 @@
+command -v dotfiles_is_macos >/dev/null 2>&1 || source "$HOME/.dotfiles/scripts/host_common"
+
 plugins+=(command-time)
 dotfiles_is_macos && plugins+=(macos)
 
@@ -47,4 +49,4 @@ zstyle -e ':completion:*:(ssh|scp|sftp|rsh|rsync):hosts' hosts 'reply=(${=${${(f
 
 [[ -f /usr/local/bin/aws_zsh_completer.sh ]] && source /usr/local/bin/aws_zsh_completer.sh
 [[ -f /opt/homebrew/bin/aws_zsh_completer.sh ]] && source /opt/homebrew/bin/aws_zsh_completer.sh
-source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -f "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && source "$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"

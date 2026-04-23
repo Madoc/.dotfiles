@@ -39,7 +39,6 @@ esac
 
 DOTFILES_HOSTNAME="$(hostname -s 2>/dev/null || hostname 2>/dev/null || echo unknown)"
 
-export DOTFILES_HOST_COMMON_LOADED
 export DOTFILES_PLATFORM
 export DOTFILES_OS
 export DOTFILES_HOSTNAME

@@ -1,3 +1,5 @@
+command -v dotfiles_is_macos >/dev/null 2>&1 || source "$HOME/.dotfiles/scripts/host_common"
+
 # Editor
 
 if dotfiles_is_macos && command -v subl >/dev/null; then
